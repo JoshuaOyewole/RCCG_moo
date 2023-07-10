@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./src/index.ts ",
   "scripts": {
-    "build": "npx tsc",
+    "build": "node src/index.ts",
     "start": "node dist/index.ts",
     "dev": "nodemon -q src/index.ts"
   },
