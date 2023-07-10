@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node src/index.ts",
     "start": "node dist/index.ts",
-    "dev": "nodemon -q src/index.ts"
+    "dev": "nodemon src/index.ts"
   },
   "license": "MIT",
   "devDependencies": {

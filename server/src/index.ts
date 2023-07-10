@@ -21,7 +21,6 @@ dbConnect();
 //PORT
 const PORT = process.env.PORT;
 
-
 // Set up rate limiter: maximum of twenty requests per minute
 const limiter = RateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
