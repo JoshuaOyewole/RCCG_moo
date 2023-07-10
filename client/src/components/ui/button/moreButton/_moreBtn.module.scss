@@ -1,0 +1,38 @@
+@use "../../../../styles/abstracts/variables" as variable;
+@use "../../../../styles/abstracts/mixins" as mixin;
+
+.moreBtn {
+    &-container {
+      font-family: 'Work Sans', sans-serif;
+      max-width: 15rem;
+      max-height: 10rem;
+      padding: .8rem;
+      background: variable.$White;
+      border: 1px solid rgba(84, 95, 125, 0.04);
+      box-shadow: 3px 5px 20rem rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      position: absolute;
+      right: 2rem;
+      top: 8.7rem;
+    }
+  
+    &-btn {
+      @include mixin.flex($align:center);
+      background: transparent;
+      margin: .7rem .5rem;
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: variable.$secondary;
+    }
+
+    &-icon{
+      display: flex;
+      width: 1.5rem;
+      margin-right: .3rem;
+    }
+
+    &-text{
+      display: inline-block;
+      margin-left: 0.7rem;
+    }
+  }

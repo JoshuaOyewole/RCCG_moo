@@ -1,0 +1,168 @@
+@use "../../styles/abstracts/variables" as variable;
+@use "../../styles/abstracts/mixins" as mixin;
+
+.dashboard {
+  &__container {
+    background-color: variable.$White-T1;
+    height: 100vh;
+  }
+  &__childrenWrapper {
+    width: 80%;
+    margin: 0 auto;
+
+    @include mixin.media("tab") {
+      width: 100%;
+    }  
+  }
+  &__header {
+    max-height: 8rem;
+    /* height: 10vh; */
+    padding: 1rem 3rem;
+
+    @include mixin.flex($justify: space-between, $align: center);
+    background-color: variable.$White;
+    box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+
+    @include mixin.media("tab") {
+      padding: 2rem 4rem 2rem 2rem;
+    }
+    @include mixin.media("phone") {
+      padding: 2rem;
+    }
+  }
+
+  &__logoContainer {
+    flex-basis: 25%;
+
+    @include mixin.media("phone") {
+      padding-top: 0.5rem;
+    }
+  }
+
+  &__logo {
+    width: 13rem;
+    height: 2.5rem;
+
+    @include mixin.media("phone") {
+      width: 10rem;
+      height: 2rem;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__headerNavWrapper {
+    @include mixin.flex($align: center, $justify: space-around);
+    width: 15%;
+
+    @include mixin.media("tab") {
+      width: 20%;
+    }
+    @include mixin.media("tab") {
+      width: 40%;
+    }
+    @include mixin.media("xs-phone") {
+      width: 50%;
+    }
+  }
+
+  &__sidebar {
+    width: 20%;
+    max-height: 93vh;
+    height: 90vh;
+    overflow: scroll;
+    padding-top: 2rem;
+    background-color: variable.$White;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
+
+    @include mixin.media("LGdesktop") {
+      width: 25%;
+    }
+
+    /* @include mixin.media("desktop"){
+            width: 25%;
+        }; */
+    @include mixin.media("tab") {
+      display: none;
+    }
+
+    &--sectionTitle {
+      font-family: "Work Sans";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      color: variable.$secondary;
+      padding-left: 3.8rem;
+      padding-bottom: 1rem;
+      padding-top: 3.5rem;
+
+      @include mixin.media("tab") {
+        display: none;
+      }
+    }
+  }
+
+  &__content {
+    flex-basis: 80%;
+    height: 90vh;
+    overflow: scroll;
+    padding: 3rem 6.9rem;
+
+    @include mixin.media("desktop") {
+      padding: 3rem 3rem;
+    }
+
+    @include mixin.media("tab") {
+      flex-basis: 100%;
+    }
+
+    @include mixin.media("phone") {
+      padding: 2rem 1rem;
+      flex-basis: 100%;
+    }
+  }
+}
+
+.userProfile {
+  &__container {
+    @include mixin.flex($align: center, $justify: space-between);
+  }
+
+  &__picture {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-image: url("../../assets/images/profilePixs.png");
+
+    @include mixin.media("tab") {
+      width: 3rem;
+      height: 3rem;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  &__userName {
+    font-family: "Work Sans", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: variable.$tertiary;
+    margin: auto 1rem;
+  }
+
+  &__icon {
+    background-color: transparent;
+  }
+
+  &__bellIcon {
+    background-color: transparent;
+    color: variable.$tertiary !important;
+    font-weight: bold !important;
+    font-size: 2rem !important;
+  }
+}

@@ -1,0 +1,83 @@
+@use "../../styles/abstracts/variables" as variable;
+@use "../../styles/abstracts/mixins" as mixin;
+
+.input_container {
+  .input-label {
+    margin-bottom: 0.44rem;
+    color: variable.$White-T1;
+  }
+}
+
+.input_field_container {
+  width: 100%;
+  border: 1.4px solid;
+  border-color: variable.$White-T1;
+  border-radius: variable.$input-radius;
+  @include mixin.flex($align: center);
+
+  &:focus-within {
+    border-color: variable.$Dixre-Main;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.67rem 0.89rem;
+    border-radius: variable.$input-radius;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+
+    &:active {
+      border: 0;
+      outline: 0;
+    }
+
+    &:focus {
+      border: 0;
+      outline: 0;
+    }
+
+    &::placeholder {
+      color: variable.$White-T1;
+    }
+  }
+
+  &.icon-right {
+    position: relative;
+
+    input {
+      padding-right: 2rem;
+    }
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      right: 0.89rem;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.icon-left {
+    position: relative;
+
+    input {
+      padding-left: 2rem;
+    }
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 0.89rem;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.form_control {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  &:not(:first-child) {
+    margin: 10px 0;
+}
+}

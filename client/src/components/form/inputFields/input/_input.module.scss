@@ -1,0 +1,80 @@
+@use "../../../../styles/abstracts/variables" as variable;
+@use "../../../../styles/abstracts/mixins" as mixin;
+
+.input {
+    &_label {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        @include mixin.flex($align: center);
+        letter-spacing: .01em;
+        color: variable.$secondary;
+    }
+
+    &_field {
+        font-family: "Matter";
+        font-size: 1.3rem;
+        line-height: 2rem;
+        flex-direction: column;
+        @include mixin.flex();
+        padding: 14px 16px;
+        gap: 8px;
+        width: 430px;
+        height: 48px;
+        background: variable.$White;
+        color: #788;
+        border: 1.4px solid variable.$secondary;
+        border-radius: 4px;
+
+        @include mixin.media('tab') {
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            font-size: 1.368rem;
+        }
+
+        @include mixin.media('phone') {
+            font-size: 1.63rem;
+        }
+
+        &:focus {
+            outline: 1.4px solid variable.$Dixre-Main  !important;
+            color: variable.$secondary;
+        }
+    }
+}
+
+.error {
+    &_container {
+        @include mixin.flex($align: Center);
+        margin: -0.5rem 0 1rem 0;
+        display: none;
+    }
+
+    &_msg {
+        font-size: 1.3rem;
+        line-height: 2rem;
+        color: variable.$Error-Main;
+        padding-left: .5rem;
+        
+
+        @include mixin.media('tab') {
+            font-size: 1.38rem;
+        }
+
+        @include mixin.media('phone') {
+            font-size: 1.7rem;
+        }
+
+        @include mixin.media('sm-phone') {
+            font-size: 1.8rem;
+        }
+    }
+}
+
+.buttonIcon{
+    background-color: transparent;
+    color: variable.$Dixre-Main;
+    font-size: 1.2rem;
+}

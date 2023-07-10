@@ -1,0 +1,119 @@
+@use "../abstracts/mixins" as mixin;
+@use "../abstracts/variables" as variable;
+
+//UTILITIES CLASSES
+
+.flex {
+  display: flex;
+}
+
+.h-45 {
+  height: 45% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.tertiary-color {
+  color: variable.$tertiary;
+}
+
+.w-90 {
+  width: 90% !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+
+.show {
+  display: flex !important;
+}
+.hide {
+  display: none !important;
+}
+
+.my-s {
+  margin: 25px 0 4px !important;
+}
+
+.pt-m {
+  padding-top: 5rem !important;
+}
+
+.pb-s {
+  padding-bottom: 2rem !important;
+}
+
+.my-m {
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.px-s {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+.mt-1 {
+  margin-top: 1rem !important;
+}
+.mt-2 {
+  margin-top: 2rem !important;
+}
+.mr-sIcon {
+  margin-right: 1rem !important;
+  @include mixin.media("tab") {
+    display: none;
+  }
+}
+.divider {
+  width: 70%;
+  border: 1px solid #f7eded;
+  margin-top: 1rem;
+  @include mixin.media("phone") {
+    width: 100%;
+  }
+}
+.mb-1 {
+  margin-bottom: 1rem !important;
+}
+
+.pr-s {
+  padding-right: 0.3rem !important;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+.col {
+  flex-direction: column !important;
+}
+
+.center {
+  @include mixin.flex($justify: center, $align: center);
+}
+
+.Inactive {
+  color: variable.$secondary !important;
+  background: rgba($color: variable.$secondary, $alpha: 0.1) !important;
+}
+
+.Pending {
+  color: variable.$Warning-Main !important;
+  background: rgba($color: variable.$Warning-Main, $alpha: 0.1) !important;
+}
+
+.Active {
+  color: variable.$Success-Main !important;
+  background: rgba($color: variable.$Success-Main, $alpha: 0.1) !important;
+}
+
+.Blacklisted {
+  color: variable.$Error-Main !important;
+  background: rgba($color: variable.$Error-Main, $alpha: 0.1) !important;
+}

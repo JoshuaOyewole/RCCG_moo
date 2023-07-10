@@ -1,0 +1,53 @@
+@use "../../../styles/abstracts/variables" as variable;
+
+.react_select_container {
+  width: 100%;
+
+  [class$="-control"] {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: rgba(33, 63, 125, 0.1);
+    border-radius: 4px;
+  }
+
+  [class="-control--is-focused"] {
+    border: 0 !important;
+  }
+
+  [class$="-input-container"] {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  [class$="-value-container"] {
+    padding: 0.22rem 1.25rem !important;
+    font-size: 1rem;
+  }
+
+  [class*="option--is-selected"] {
+    background-color: variable.$White-T1 !important;
+    color: variable.$White-T1 !important;
+  }
+
+  [class*="option--is-focused"] {
+    background-color: variable.$Dixre-Main !important;
+  }
+
+  [class$="-indicatorSeparator"] {
+    display: none;
+  }
+
+  [class$="placeholder"] {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #213F7D;
+  }
+
+  [class$="-multi-value"] {
+    margin: 0 !important;
+    padding: 0.33rem 0.89rem;
+    border-radius: variable.$rounded-full !important;
+  }
+}

@@ -1,0 +1,71 @@
+@use "../../../styles//abstracts/variables" as variable;
+@use "../../../styles/abstracts/mixins" as mixin;
+
+.table_container {
+  background: variable.$White;
+  padding: 2rem 3rem;
+  height: 100%;
+  overflow: scroll;
+  position: relative;
+
+  @include mixin.media("tab"){
+    height: auto;
+     padding: 2rem;
+  }
+
+  table {
+    font-family: 'Work Sans', sans-serif;
+    width: 100%;
+    background-color: variable.$White;
+    padding: 2rem;
+    text-align: left;
+    border-collapse: collapse;
+    overflow: scroll;
+
+
+    @include mixin.media("desktop") {
+      min-width: 1100px;
+    }
+
+    th {
+
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      color: variable.$secondary;
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+
+      &>img {
+        width: 1rem;
+        margin-left: .2rem;
+      }
+    }
+
+    .table-row {
+      font-size: 1rem;
+
+      &:hover{
+        background-color: rgba(218, 222, 228, 0.1);
+      }
+      &:not(:first-of-type) {
+        border-top: 1px solid rgba(33, 63, 125, 0.1);
+      }
+
+      td {
+        &:first-child{
+          padding: 1.5rem 0;
+        }
+        color: variable.$secondary;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+      }
+
+
+    }
+  }
+}
+
+
+
