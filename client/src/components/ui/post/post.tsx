@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PostStyles from "../../../components/ui/createPost/_createpost.module.scss"
+import photo1 from "../../../assets/images/post_img1.jpg";
+import photo2 from "../../../assets/images/post_img2.jpg";
 
 export interface IPostProps {
     postID: string,
@@ -46,10 +48,10 @@ export default function Post(props: IPostProps) {
             {/* Photos */}
             <div className={PostStyles.post__post_photos}>
                 <div className={PostStyles.post__post_photoContainer}>
-                    <img src="src/assets/images/post_img2.jpg" alt="Photo 1" />
+                    <img src={photo1} alt="Photo 1" />
                 </div>
                 <div className={PostStyles.post__post_photoContainer}>
-                    <img src="src/assets/images/post_img1.jpg" alt="photo 2" />
+                    <img src={photo2} alt="photo 2" />
                 </div>
 
             </div>
