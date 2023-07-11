@@ -35,7 +35,7 @@ const Modal: React.FunctionComponent<IModalProps> = (props) => {
                     <span>  Add to your Post</span>
 
                    {/*  <FontAwesomeIcon icon={faPhotoFilm} size="2xl" className={ModalStyles.modal__addPhotoIcon} /> */}
-                    <input type="file" name="photos"  className={ModalStyles.modal__addPhotoIcon} multiple />
+                    <input type="file" name="photos" accept="image/*" className={ModalStyles.modal__addPhotoIcon} multiple />
 
                 </p>
                 <input type="submit" value="Post" className={ModalStyles.modal__submitBtn} />

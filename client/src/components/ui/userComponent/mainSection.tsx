@@ -5,7 +5,7 @@ import CreatePost from "../createPost/createPost"
 import Post from "../post/post"
 import Modal from "../createPost/Modal"
 
-
+import ProfilePixs from "../../../assets/images/profilePixs.png"
 
 type MainSection = {
   iconClassName?: string
@@ -60,10 +60,10 @@ const MainSection = (props: MainSection) => {
         <CreatePost />
       </div>
       <div className={PostStyles.post__posts_container}>
-        <Post postID="u8ue24" username="Joshua M. Oyewole" timeposted="6hr ago" userImg="src/assets/images/profilePixs.png"/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg="src/assets/images/profilePixs.png"/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg="src/assets/images/profilePixs.png"/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg="src/assets/images/profilePixs.png"/>
+        <Post postID="u8ue24" username="Joshua M. Oyewole" timeposted="6hr ago" userImg={ProfilePixs}/>
+        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
+        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
+        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
       </div>
 
 

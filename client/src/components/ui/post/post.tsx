@@ -7,7 +7,6 @@ export interface IPostProps {
     userImg: string,
     timeposted: string
 }
-
 export default function Post(props: IPostProps) {
     const [toggleView, setToggleView] = useState<boolean>(true);
 
