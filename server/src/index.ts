@@ -42,8 +42,6 @@ app.use(error);
 
 /* console.log("Error is ===>", process.env.MONGO_URL); */
 
-
 app.listen(PORT, () => {
     console.log(`server connected on PORT ${PORT}`);
 })
-
