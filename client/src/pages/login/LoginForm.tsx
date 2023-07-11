@@ -4,12 +4,20 @@ import InputField from '../../components/form/inputFields/input/Input'
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
 import usePasswordToggle from "../../hooks/usePasswordToggle"
 import { NavLink, useNavigate } from "react-router-dom"
+import axios from "axios"
+import { toast } from "react-toastify"
 
 
 type credentialsProps = {
   phone: string,
   password: string
 }
+
+/* 
+TODO
+1. Please in a REACT TOAST to display logging and also diplay successfully logged in
+You can use the promise method of React Toast
+ */
 
 const LoginForm = () => {
   const [InputType, Icon] = usePasswordToggle();
@@ -20,18 +28,32 @@ const LoginForm = () => {
     password: ""
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  ///Function to Handle Login Action
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    /* 
-      1. Send the user credentials (phone & password) to the login API that will be provided
-      2. If Request is Successful, login the user to the Dixre dashboard ELSE
-      3. Throw up Error
-    */
 
-    navigate("/");//Assuming all things went well
+    try {
+      const res = await axios.post('http://localhost:5000/login', credentials);
+      localStorage.setItem("token", res.data.token)
 
+      navigate("/");//Assuming all things went well
+
+    } catch (error: any) {
+      toast.error(` ${error.response.data.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
   }
 
+  //Handle Credential State when a change Event is Fired
   const handleChange = (e: React.ChangeEvent<HTMLButtonElement>) => {
     setCredentials(
       (prev) => ({
