@@ -13,7 +13,6 @@ const Modal: React.FunctionComponent<IModalProps> = (props) => {
         const {profilePixs, userImg,username} = useSelector(state=>state.user);
     */
     const username = "Joshua M. Oyewole";
-    const userImg = "/src/assets/images/profilePixs.png";
 
 
     return <div className={ModalStyles.modal__container}>
@@ -22,7 +21,7 @@ const Modal: React.FunctionComponent<IModalProps> = (props) => {
 
         <div>
             <div className={`${ModalStyles.post__post_header} mt-1`}>
-                <img src={userImg} className={ModalStyles.post__user_pixs} alt={username} />
+                <img src={profilePixs} className={ModalStyles.post__user_pixs} alt={username} />
                 <div className={ModalStyles.post__post_info}>
                     <p className={ModalStyles.post__user_name}>{username}</p>
                     <p>Public</p>
