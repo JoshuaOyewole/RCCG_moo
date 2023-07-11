@@ -4,6 +4,8 @@ import InputField from '../../components/form/inputFields/input/Input'
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
 import usePasswordToggle from "../../hooks/usePasswordToggle"
 import { NavLink, useNavigate } from "react-router-dom"
+import axios from "axios"
+import { toast } from "react-toastify"
 
 
 type credentialsProps = {
@@ -17,35 +19,82 @@ type credentialsProps = {
 const SignupForm = () => {
     const [InputType, Icon] = usePasswordToggle();
     const navigate = useNavigate();
+    const [gender, setGender] = useState<String>("")
 
     const [credentials, setCredentials] = useState<credentialsProps>({
         fname: "",
         lname: "",
         phone: "",
         password: "",
-        confirmPwd: ""
+        confirmPwd: "",
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        /* 
-          1. Send the user credentials (phone & password) to the login API that will be provided
-          2. If Request is Successful, login the user to the Dixre dashboard ELSE
-          3. Throw up Error
-        */
 
-        navigate("/dashboard/users");//Assuming all things went well
-
+    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setGender(e.target.value);
     }
+    //Function to Handle Signup Action
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
+        if (credentials.confirmPwd === credentials.password) {
+            //Destructure credentials into LoginPayload
+            const loginPayload = { gender:gender.toLowerCase(), firstname: credentials.fname, lastname: credentials.lname, phone: credentials.phone, password: credentials.password };
+            try {
+                const res = await axios.post('http://localhost:5000/register', (loginPayload));
+                localStorage.setItem("token", res.data.token)
+                toast.success(` ${res.data.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate("/login");//Assuming all things went well
+                }, 2000);
+
+            } catch (error: any) {
+                toast.error(` ${error.response.data.message}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+        }
+        else {
+            toast.error("Password do not Match", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+        }
+    }
+    //Handle Credential State when a change Event is Fired
     const handleChange = (e: React.ChangeEvent<HTMLButtonElement>) => {
         setCredentials(
             (prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
+
             }
             )
-        )
+        );
+
+
     }
 
     return (
@@ -82,7 +131,7 @@ const SignupForm = () => {
                     required
                 />
 
-                <select placeholder="Gender" name="gender" required className={`${LoginStyle.SignupForm__col5} ${LoginStyle.SignupForm__select}`}>
+                <select placeholder="Gender" name="gender" required className={`${LoginStyle.SignupForm__col5} ${LoginStyle.SignupForm__select}`} onChange={handleSelect}>
 
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
@@ -115,7 +164,7 @@ const SignupForm = () => {
 
             <span>
                 Already Registered?
-                 <NavLink to="/login" className={LoginStyle.fpassword}>
+                <NavLink to="/login" className={LoginStyle.fpassword}>
                     Login
                 </NavLink>
             </span>
