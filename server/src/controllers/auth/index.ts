@@ -3,6 +3,7 @@ import {Request, Response, NextFunction} from 'express';
 import bcrypt from "bcryptjs";
 import createError from "../../util/error";
 import jwt from "jsonwebtoken";
+import { log } from "console";
 
 //User Registration
 const register = async (req: Request, res: Response, next:NextFunction) => {
@@ -28,7 +29,8 @@ const register = async (req: Request, res: Response, next:NextFunction) => {
     } catch (err) {
       if (err.keyValue?.phone)
         return next(createError(401, `Phone already Exist!`));
-  
+      console.log(err);
+      
       next(createError(400, `An Error occured! Try Again`));
     }
 };
@@ -59,7 +61,7 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
       const jwt_payload = {
         firstname, phone
       };
-  
+
       const token = jwt.sign(jwt_payload, process.env.JWT_SECRET);
       /*res.cookie("access_token", token, {
           path:"/",
@@ -88,6 +90,8 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
         token: token,
       }); 
     } catch (err) {
+      console.log(err);
+      
       next(err);
     }
   };
@@ -105,6 +109,7 @@ const logout = async (req: Request, res: Response, next:NextFunction) => {
           message: `Logout successfully!`,
         });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   };
