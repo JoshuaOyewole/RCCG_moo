@@ -28,7 +28,9 @@ const UserModelSchema = new Schema({
         type: String,
         required: [true, "Kindly enter a valid Password"]
     },
-    profilePicture: { type: String }
+    profilePicture: { 
+        type: String 
+    }
 },
     { timestamps: true }
 );
