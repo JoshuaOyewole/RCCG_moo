@@ -29,7 +29,7 @@ const MainSection = (props: MainSection) => {
   /* FETCH post FROM API */
   const fetchPost = async () => {
     try {
-      const response = await axios.get("https://6270020422c706a0ae70b72c.mockapi.io/Dixre/api/v1/users");
+      const response = await axios.get("http://localhost:5000/posts");
       setPost(response.data);
       localStorage.setItem("post", JSON.stringify(response.data));
     } catch (error) {
@@ -60,9 +60,9 @@ const MainSection = (props: MainSection) => {
         <CreatePost />
       </div>
       <div className={PostStyles.post__posts_container}>
-        <Post postID="u8ue24" username="Joshua M. Oyewole" timeposted="6hr ago" userImg={ProfilePixs}/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
+        <Post postID="u8ue24" username="Joshua M. Oyewole" timeposted="1hr ago" userImg={ProfilePixs}/>
+        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="3hr ago" userImg={ProfilePixs}/>
+        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="2hr ago" userImg={ProfilePixs}/>
         <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
       </div>
 
