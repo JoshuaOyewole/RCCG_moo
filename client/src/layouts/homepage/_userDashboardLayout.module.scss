@@ -12,7 +12,7 @@
 
     @include mixin.media("tab") {
       width: 100%;
-    }  
+    }
   }
   &__header {
     max-height: 8rem;
@@ -87,22 +87,6 @@
     @include mixin.media("tab") {
       display: none;
     }
-
-    &--sectionTitle {
-      font-family: "Work Sans";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 1.2rem;
-      line-height: 1.4rem;
-      color: variable.$secondary;
-      padding-left: 3.8rem;
-      padding-bottom: 1rem;
-      padding-top: 3.5rem;
-
-      @include mixin.media("tab") {
-        display: none;
-      }
-    }
   }
 
   &__content {
@@ -164,5 +148,36 @@
     color: variable.$tertiary !important;
     font-weight: bold !important;
     font-size: 2rem !important;
+  }
+}
+.sidebar {
+  &__navItem {
+    padding: 1rem 2rem 1rem 4rem;
+    /* background-color: rgba($color: variable.$Dixre-Main, $alpha: 0.06);
+      border-left: 5px solid variable.$Dixre-Main; */
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+    @include mixin.media("desktop") {
+      padding: 1rem 2rem;
+    }
+  }
+
+  &__navLink {
+    @include mixin.flex($align: center);
+    font-family: "Work Sans", sans-serif;
+    color: rgba($color: variable.$tertiary, $alpha: 0.6);
+    font-weight: 500;
+    font-size: 1.6rem;
+
+    & > img {
+      width: 1.6rem;
+    }
+    & > span {
+      margin-left: 2rem;
+      @include mixin.media("tab") {
+        display: none;
+      }
+    }
   }
 }
