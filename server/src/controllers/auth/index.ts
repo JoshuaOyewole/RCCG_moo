@@ -3,7 +3,6 @@ import {Request, Response, NextFunction} from 'express';
 import bcrypt from "bcryptjs";
 import createError from "../../util/error";
 import jwt from "jsonwebtoken";
-import { log } from "console";
 
 //User Registration
 const register = async (req: Request, res: Response, next:NextFunction) => {
@@ -56,10 +55,10 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
       if (!isPasswordCorrect) {
         return next(createError(400, "Incorrect Password, Kindly Try Again!"));
       }
-      const {phone,firstname, lastname} = user; //Destructing password from the user details recieved...
+      const {firstname, lastname, _id:id} = user; //Destructing password from the user details recieved...
   
       const jwt_payload = {
-        firstname, phone
+        firstname, lastname,id
       };
 
       const token = jwt.sign(jwt_payload, process.env.JWT_SECRET);
@@ -85,7 +84,7 @@ const login = async (req: Request, res: Response, next:NextFunction) => {
         status: 200,
         message: `Logged in successfully!`,
         details: {
-          phone,firstname, lastname
+          firstname, lastname
         },
         token: token,
       }); 
