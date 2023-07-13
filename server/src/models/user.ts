@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import { UserType } from "interfaces/UserType";
 
 // Define a schema
 const Schema = mongoose.Schema;
 
-const UserModelSchema = new Schema({
+const UserModelSchema = new Schema<UserType>({
     firstname: {
         type: String,
         required: [true, "Firstname is required"]

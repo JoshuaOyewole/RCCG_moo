@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { PostType, CreatorType } from "interfaces/PostType";
+import { PostType} from "interfaces/PostType";
 
 // Define a schema
 const Schema = mongoose.Schema;
