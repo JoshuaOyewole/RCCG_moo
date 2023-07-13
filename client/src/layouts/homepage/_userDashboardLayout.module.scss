@@ -119,7 +119,6 @@
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    background-image: url("../../assets/images/profilePixs.png");
 
     @include mixin.media("tab") {
       width: 3rem;

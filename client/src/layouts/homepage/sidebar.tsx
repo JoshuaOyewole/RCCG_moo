@@ -1,11 +1,16 @@
 import DashboardStyles from "./_userDashboardLayout.module.scss"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faHouseUser, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 
 
 const Sidebar = () => {
+    const navigate = useNavigate();
 
+    const logout = () => {
+        localStorage.removeItem('token');
+        navigate('/login')
+    }
     return (
         <aside className={DashboardStyles.dashboard__sidebar}>
             <ul>
@@ -26,9 +31,10 @@ const Sidebar = () => {
                     </NavLink>
                 </li>
                 <li className={DashboardStyles.sidebar__navItem}>
-                    <NavLink className={DashboardStyles.sidebar__navLink} to="#logout">
+                    <button className={DashboardStyles.sidebar__navLink} onClick={() => logout()}>
                         <FontAwesomeIcon icon={faRightFromBracket} /> <span>Logout</span>
-                    </NavLink>
+                    </button>
+
                 </li>
             </ul>
 

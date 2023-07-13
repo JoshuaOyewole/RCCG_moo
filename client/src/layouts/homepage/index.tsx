@@ -5,6 +5,9 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { faCaretDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../../context/userContext"
+
 
 
 type HomepageProps = {
@@ -12,9 +15,10 @@ type HomepageProps = {
 }
 
 
-
 function HomepageLayout(props: HomepageProps) {
     const { children } = props;
+
+    const user = useContext(UserContext)
 
 
     return (
@@ -30,19 +34,16 @@ function HomepageLayout(props: HomepageProps) {
                         />
                     </NavLink>
                 </div>
-                
+
                 <div className={DashboardStyles.dashboard__headerNavWrapper}>
                     <button className={DashboardStyles.userProfile__icon}>
                         <FontAwesomeIcon icon={faBell} className={DashboardStyles.userProfile__bellIcon} />
                     </button>
                     <div className={DashboardStyles.userProfile__container}>
-                        {
-                            /* REMEMBER YTO CHANGE HERE
-                            The User Profile Image should be gotten from Redux Store 
-                            */
-                        }
-                        <div className={DashboardStyles.userProfile__picture}></div>
-                        <h4 className={DashboardStyles.userProfile__userName}>Adedeji</h4>
+
+                        <img src={user.profilePixs} alt={`${user.firstname} profile picture`} className={DashboardStyles.userProfile__picture} />
+
+                        <h4 className={DashboardStyles.userProfile__userName}>{user.firstname} {user.lastname.slice(0, 1)}</h4>
                         <button className={DashboardStyles.userProfile__icon}>
                             <FontAwesomeIcon
                                 icon={faCaretDown}
