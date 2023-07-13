@@ -1,53 +1,50 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import PostStyles from "../../../components/ui/createPost/_createpost.module.scss"
 import CreatePost from "../createPost/createPost"
 import Post from "../post/post"
 import Modal from "../createPost/Modal"
-
-import ProfilePixs from "../../../assets/images/profilePixs.png"
+import axiosClient from "../../../config/axios"
 
 type MainSection = {
   iconClassName?: string
 }
 
 type post = {
-  id: number;
-  accountBalance: string;
-  createdAt: string;
-  orgName: string;
-  userName: string;
-  email: string;
-  phoneNumber: string
+  _id: string;
+  creator: {
+    id: string,
+    name: string,
+    profilePicture: string
+  },
+  createdAt: string,
+  photos: string[],
+  post_description: string,
+  time_posted: string,
 }
 
 
 const MainSection = (props: MainSection) => {
-  const [post, setPost] = useState<Array<post>>([])
+  const [posts, setPost] = useState<Array<post>>([])
 
+  const user_id = "64adf95e3df9781ce07e75e0";
 
-  /* FETCH post FROM API */
   const fetchPost = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/posts");
+      const response = await axios.get(`http://localhost:5000/post/${user_id}`
+      );
       setPost(response.data);
-      localStorage.setItem("post", JSON.stringify(response.data));
+      console.log(response.data);
     } catch (error) {
       throw error
     }
   }
 
-
   useEffect(() => {
-    //Fetch post data stored in localStorage
-    const getpost = localStorage.getItem("post");
+    /* FETCH post FROM API */
 
-    if (getpost != null) {
-      setPost(JSON.parse(getpost));
 
-    } else {
-      fetchPost();
-    }
+    fetchPost();
   }, [])
 
 
@@ -60,10 +57,19 @@ const MainSection = (props: MainSection) => {
         <CreatePost />
       </div>
       <div className={PostStyles.post__posts_container}>
-        <Post postID="u8ue24" username="Joshua M. Oyewole" timeposted="1hr ago" userImg={ProfilePixs}/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="3hr ago" userImg={ProfilePixs}/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="2hr ago" userImg={ProfilePixs}/>
-        <Post postID="u8ue24" username="Felix S Temidayo" timeposted="4hr ago" userImg={ProfilePixs}/>
+        {
+          posts.map((post, index) => {
+            return <Post
+              key={index}
+              post_desc={post.post_description}
+              postID={post._id}
+              username={post.creator.name}
+              timeposted={post.time_posted}
+              userImg={post.creator.profilePicture}
+              photos={post.photos}
+            />
+          })
+        }
       </div>
 
 

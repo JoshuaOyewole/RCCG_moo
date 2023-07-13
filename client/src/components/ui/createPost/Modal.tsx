@@ -1,18 +1,14 @@
 import ModalStyles from "./_createpost.module.scss";
-import profilePixs from "../../../assets/images/profilePixs.png"
 import { faCamera, faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import UserContext from "../../../context/userContext";
 
 interface IModalProps {
 }
 
 const Modal: React.FunctionComponent<IModalProps> = (props) => {
-
-    /* 
-        Get Profile Picture from STORE
-        const {profilePixs, userImg,username} = useSelector(state=>state.user);
-    */
-    const username = "Joshua M. Oyewole";
+    const user = useContext(UserContext)
 
 
     return <div className={ModalStyles.modal__container}>
@@ -21,9 +17,9 @@ const Modal: React.FunctionComponent<IModalProps> = (props) => {
 
         <div>
             <div className={`${ModalStyles.post__post_header} mt-1`}>
-                <img src={profilePixs} className={ModalStyles.post__user_pixs} alt={username} />
+                <img src={user.profilePixs} className={ModalStyles.post__user_pixs} alt={user.firstname} />
                 <div className={ModalStyles.post__post_info}>
-                    <p className={ModalStyles.post__user_name}>{username}</p>
+                    <p className={ModalStyles.post__user_name}>{user.firstname} {user.lastname}</p>
                     <p>Public</p>
                 </div>
             </div>
