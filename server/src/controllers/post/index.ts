@@ -12,15 +12,17 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
         const postBody: PostBody = req.body;
 
         //Check if the user exist in the DB
-        const user = await User.findById(postBody.creator_id);
+        const user = await User.findById(postBody.creator_id);//Overtime the creator ID will be gotten from the req.user
+        console.log("user trying to create a POST is ==>", user);
 
         if (user) {
             //Destructure required datas from the User 
             const { _id: id, firstname, lastname, profilePicture } = user;
 
+
             //User creating a post Object
             const creator = {
-                id, name: `${firstname}  ${lastname}`, profilePicture
+                id, name: `${firstname} ${lastname}`, profilePicture
             }
 
             const Post_payload = {
@@ -30,10 +32,11 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
                 time_posted: new Date()
 
             };
+
             await Post.create(Post_payload);
             res.status(200).json({
                 success: true,
-                message: ` Post Created Successfully successful!`
+                message: ` Post Created Successfully`
             });
         } else {
             res.status(401).json({
@@ -49,22 +52,38 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 
 //GetAllPost Controller
 const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
+    const user_id = req.params.user_id;//should be req.user.id 
+    console.log('Req.params is =>', req.params);
 
-    try {
-        const getter_id = req.params;
-        const posts = await Post.find();
+    if (user_id !== undefined || "") {
+        try {
+            const posts = await Post.find();
 
+            //Check if there is a post in the DB
+            if (posts.length >= 1) {
 
-        const filteredPost = posts.filter(post => post.id !== getter_id);
-        res.status(200).json({
+                const filteredPost = posts.filter(post => post.creator.id !== user_id);//filter out user own post
+
+                res.status(200).json(filteredPost);
+            }
+            else {
+                res.status(404).json({
+                    success: true,
+                    message: ` No Post Available `,
+                });
+            }
+
+        } catch (error) {
+            next(createError(400, `An Error occured! Try Again`));
+        }
+    }
+    else {
+        res.status(400).json({
             success: true,
-            message: ` Post Created Successfully successful!`,
-            data: filteredPost
+            message: ` Kindly pass a User ID`,
         });
-    } catch (error) {
-        next(createError(400, `An Error occured! Try Again`));
     }
 }
 
 
-export default { getAllPost, createPost }
+export { getAllPost, createPost }

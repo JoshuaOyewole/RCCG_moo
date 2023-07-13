@@ -14,6 +14,8 @@ import error from "./middleware/error";
 //ROUTES IMPORTATION
 import loginRoute from "./routes/auth/login";
 import registerRoute from "./routes/auth/register";
+import postRoute from "./routes/post/index";
+import userRoute from "./routes/users/index";
 
 
 //DB INITIALIZATION
@@ -36,6 +38,8 @@ app.use(cookieParser());
 //ROUTES
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+app.use("/post", postRoute);
+app.use("/user", userRoute);
 
 //ERROR HANDLING MIDDLEWARE
 app.use(error);
