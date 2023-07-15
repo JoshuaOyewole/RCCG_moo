@@ -1,5 +1,5 @@
 import LoginStyles from "./_login.module.scss"
-import loginImg from "../../assets/images/pablo-sign-in.png"
+import loginImg from "../../assets/images/login.png"
 import logo from "../../assets/images/logo.png"
 import LoginForm from "./LoginForm"
 import { NavLink } from "react-router-dom"

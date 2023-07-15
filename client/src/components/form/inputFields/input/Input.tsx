@@ -6,6 +6,7 @@ export interface InputProps {
   icon?: React.ReactNode;
   iconPosition?: string;
   iconAction?: Function;
+  innerRef?:any,
   iconClassName?: string;
   labelClassName?: string,
   inputContainerClassName?: string,
@@ -21,6 +22,7 @@ const InputField: React.FC<InputProps> = (props, _ref) => {
     iconAction,
     iconClassName,
     labelClassName,
+    innerRef,
     inputContainerClassName,
     ...rest
   } = props;
@@ -40,7 +42,7 @@ const InputField: React.FC<InputProps> = (props, _ref) => {
         className={`${CommonInputStyle.input_field_container}  ${icon && (iconPosition === "left" ? "icon-left" : "icon-right")
           }`}
       >
-        <input {...rest} />
+        <input {...rest}/>
 
         {icon && <span
           className={`icon ${iconClassName ? iconClassName : ""}`}

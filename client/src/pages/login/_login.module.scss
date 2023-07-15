@@ -18,8 +18,8 @@
   }
 
   &__image {
-    max-width: 60rem;
-    max-height: 33.757rem;
+    max-width: 85rem;
+    max-height: 175.757rem;
   }
 
   &__signupContainer {
@@ -87,7 +87,7 @@
     font-family: "Avenir Next", sans-serif;
     font-style: normal;
     font-weight: 400;
-/*     padding-top: 1rem; */
+    /*     padding-top: 1rem; */
     font-size: 1.7rem;
     line-height: 2.7rem;
     color: variable.$secondary;
@@ -180,14 +180,15 @@
   }
   &__wrapper {
     @include mixin.flex($align: center, $justify: space-between);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     @include mixin.media("phone") {
-     flex-wrap: wrap;
+      flex-wrap: wrap;
     }
   }
 
   &__select {
     padding: 1.55rem 1rem;
-    margin-bottom: 2rem;
     border-radius: 5px;
     border: 1px solid rgba(84, 95, 125, 0.15);
   }

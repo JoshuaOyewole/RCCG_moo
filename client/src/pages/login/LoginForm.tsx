@@ -35,7 +35,11 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post('http://localhost:5000/login', credentials);
-      localStorage.setItem("token", res.data.token)
+
+      localStorage.setItem("user", JSON.stringify({
+        token: res.data.token,
+        user: res.data.details
+      }))
 
       navigate("/");//Assuming all things went well
 
@@ -49,7 +53,7 @@ const LoginForm = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     }
   }
 
