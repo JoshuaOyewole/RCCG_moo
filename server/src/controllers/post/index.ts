@@ -13,7 +13,6 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 
         //Check if the user exist in the DB
         const user = await User.findById(postBody.creator_id);//Overtime the creator ID will be gotten from the req.user
-        console.log("user trying to create a POST is ==>", user);
 
         if (user) {
             //Destructure required datas from the User 
@@ -52,8 +51,8 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 
 //GetAllPost Controller
 const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
-    const user_id = req.params.user_id;//should be req.user.id 
-    console.log('Req.params is =>', req.params);
+    const user_id = req.query.user_id;//should be req.user.id 
+
 
     if (user_id !== undefined || "") {
         try {
@@ -61,8 +60,9 @@ const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
 
             //Check if there is a post in the DB
             if (posts.length >= 1) {
-
-                const filteredPost = posts.filter(post => post.creator.id !== user_id);//filter out user own post
+                const filteredPost = posts.filter(post => {
+                    return post.creator.id === user_id
+                });//filter out current user post
 
                 res.status(200).json(filteredPost);
             }
