@@ -1,7 +1,12 @@
+type errorType = {
+  message:string,
+  status?: number
+}
+
 const createError = (status: number, message: string) => {
-  const err = new Error();
+  const err:errorType = new Error();
   err.message = message;
-  //err.status =status;
+  err.status =status;
   return err;
 };
 

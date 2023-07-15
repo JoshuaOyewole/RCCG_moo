@@ -10,6 +10,7 @@ export interface UserType {
     firstname: string,
     lastname: string,
     phone: number,
+    email:string,
     nationality: string,
     gender:string,
     password:string,

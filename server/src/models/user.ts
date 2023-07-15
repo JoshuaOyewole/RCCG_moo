@@ -17,6 +17,10 @@ const UserModelSchema = new Schema<UserType>({
         type: Number,
         required: [true, "Phone Number is required"]
     },
+    email: {
+        type: String,
+        required: [true, "Email is required"]
+    },
     nationality: {
         type: String,
     },
