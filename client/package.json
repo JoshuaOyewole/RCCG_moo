@@ -16,6 +16,7 @@
     "dayjs": "^1.11.9",
     "dotenv": "^16.3.1",
     "firebase": "^10.0.0",
+    "intl-tel-input": "^18.1.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
