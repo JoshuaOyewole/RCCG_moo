@@ -39,11 +39,10 @@ const Modal = ({ }: IModalProps) => {
                     const blob = imageUpload[index];
                     const imageRef = ref(storage, `images/${imageUpload[index].name + v4()}`);
 
-                    await uploadBytes(imageRef, blob).then(async snapshot => {
-                        await getDownloadURL(snapshot.ref).then((urls) => {
-                            postURLs.push(urls);//Push each image url uploaded 
-                        })
-                    })
+                    const snapshot = await uploadBytes(imageRef, blob);
+                    const url = await getDownloadURL(snapshot.ref)
+                    console.log(url);
+                    postURLs.push(url)
                 }
                 const payload = { creator_id: "64af540d576b8737651135a4", post_description: postDesc, photos: postURLs };
 
@@ -54,7 +53,10 @@ const Modal = ({ }: IModalProps) => {
                 toast.error('An Error Occured while Uploading  your Post');
             }
         }
-        toast.error('Photos must be Greater than 2 and less than 6')
+        else{
+            toast.error('Photos must be Greater than 2 and less than 6')
+        }
+        
     }
 
     //Handle File Input
