@@ -1,5 +1,5 @@
 import LoginStyles from "../login/_login.module.scss"
-import loginImg from "../../assets/images/pablo-sign-in.png"
+import resetPwdImg from "../../assets/images/forget-pwd.png"
 import logo from "../../assets/images/logo.png"
 import { NavLink } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
@@ -48,7 +48,7 @@ export default function index() {
 
                 <div className={LoginStyles.login__ImageContainer}>
                     <img
-                        src={loginImg}
+                        src={resetPwdImg}
                         alt="Welcome to Dixre. Kindly login below with your login details"
                         className={LoginStyles.login__image}
                     />

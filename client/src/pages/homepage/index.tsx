@@ -7,7 +7,7 @@ import axios from "axios";
 export default function index() {
     const [AllPosts, setAllPost] = useState<Array<postType>>([])
 
-    const user_id = "64adf95e3df9781ce07e75e0";
+    const user_id = "64b2dfe42b94de01f436e053";
 
 
 
