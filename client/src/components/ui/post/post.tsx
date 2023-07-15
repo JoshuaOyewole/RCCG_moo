@@ -1,5 +1,8 @@
 import { useState } from "react";
 import PostStyles from "../../../components/ui/createPost/_createpost.module.scss"
+import dayjs from 'dayjs';
+import relativeTime from "dayjs/plugin/relativeTime";
+
 
 export interface IPostProps {
     postID: string,
@@ -7,9 +10,11 @@ export interface IPostProps {
     userImg: string,
     photos: string[],
     timeposted: string,
-    post_desc:string
+    post_desc: string
 }
 export default function Post(props: IPostProps) {
+    dayjs.extend(relativeTime);
+
     const [toggleView, setToggleView] = useState<boolean>(true);
 
     const TogglePostView = (postID: string) => {
@@ -23,7 +28,7 @@ export default function Post(props: IPostProps) {
                 <img src={props.userImg} className={PostStyles.post__user_pixs} alt={props.username} />
                 <div className={PostStyles.post__post_info}>
                     <p className={PostStyles.post__user_name}>{props.username}</p>
-                    <p>{props.timeposted}</p>
+                    <p>{dayjs(props.timeposted).fromNow()}</p>
                 </div>
             </div>
             {/* Description */}
@@ -50,7 +55,7 @@ export default function Post(props: IPostProps) {
             {/* Photos */}
             <div className={PostStyles.post__post_photos}>
                 {
-                    props.photos.map((photo,index) => {
+                    props.photos.map((photo, index) => {
                         return <div className={PostStyles.post__post_photoContainer} key={index}>
                             <img src={photo} alt="Photo 1" />
                         </div>

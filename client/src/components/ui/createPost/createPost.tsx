@@ -1,5 +1,4 @@
 import createPostStyles from './_createpost.module.scss'
-import profilePixs from "../../../assets/images/profilePixs.png"
 import { useContext } from 'react';
 import UserContext from '../../../context/userContext';
 

@@ -50,11 +50,12 @@
     }
     &_photos {
       margin-top: 2rem;
-      @include mixin.flex($align: center, $justify: space-between);
+      @include mixin.flex($align: center);
+      flex-wrap: wrap;
     }
     &_photoContainer {
       @include mixin.flex($align: center);
-      flex-basis: 50%;
+      flex-basis: 33%;
       & > img {
         width: 100%;
       }
