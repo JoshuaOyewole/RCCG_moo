@@ -3,7 +3,7 @@ import React from "react"
  const UserContext = React.createContext({
     firstname: "Joshua",
     lastname: "Oyewole",
-    profilePixs: "https://comforting-truffle-bb451c.netlify.app/assets/profilePixs.e9b1dd09.png"
+    profilePixs: "https://cdn3.iconfinder.com/data/icons/network-communication-vol-3-1/48/111-512.png"
  });
 
  export default UserContext;
