@@ -31,7 +31,7 @@ const Sidebar = () => {
                     </NavLink>
                 </li>
                 <li className={DashboardStyles.sidebar__navItem}>
-                    <button className={DashboardStyles.sidebar__navLink} onClick={() => logout()}>
+                    <button className={DashboardStyles.sidebar__navLink} style={{background:'none'}} onClick={() => logout()}>
                         <FontAwesomeIcon icon={faRightFromBracket} /> <span>Logout</span>
                     </button>
 
