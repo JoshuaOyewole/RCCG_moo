@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { userType } from "./types";
 
 
 type ProtectedRouteType = {
@@ -11,8 +12,9 @@ const ProtectedRoute = (props: ProtectedRouteType) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     const checkUserToken = () => {
-        const userToken = localStorage.getItem('token');
-        if (!userToken || userToken === 'undefined') {
+        const userInfo: userType = JSON.parse(localStorage.getItem('user')!)
+        const { token } = userInfo;
+        if (!token || token === 'undefined') {
             setIsLoggedIn(false);
             return navigate('/login');
         }
