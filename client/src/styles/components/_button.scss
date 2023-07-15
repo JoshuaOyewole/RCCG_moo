@@ -1,5 +1,4 @@
 @use "../abstracts/variables" as variable;
-@use "../base/fonts" as fonts;
 @use "../abstracts/mixins" as mixin;
 
 
@@ -58,6 +57,3 @@
     max-height: 52px;
 }
 
-.invertDots{
-    background:transparent;
-}

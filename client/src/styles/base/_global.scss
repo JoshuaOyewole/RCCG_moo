@@ -33,7 +33,7 @@ body {
   padding: 0;
   font-weight: 400;
   font-size: 1.6rem;
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -65,20 +65,28 @@ img {
 
 /* Custom Scroll Bar */
 ::-webkit-scrollbar {
-  width: 5px;
-  max-height: 5px;
+  width: 3px;
+  max-height: 3px;
 
   @include mixin.media("phone") {
     width: 2px;
     max-height: 2px;
   }
 
-  @media (max-height:"600px") {
+  @media (max-height: "600px") {
     width: 3.5px;
     max-height: 2px;
   }
 }
+.iti__flag {
+  background-image: url("path/to/flags.png");
+}
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("path/to/flags@2x.png");
+  }
+}
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 }
@@ -87,9 +95,18 @@ img {
   background-color: variable.$Dixre-Main;
   border-radius: 10px;
   margin-right: 5px;
-
 }
 
+//For chrome, Safari, Edge, Opera :
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+//For firefox :
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 //prevent select
 .no-select {
   -webkit-touch-callout: none;
@@ -106,4 +123,3 @@ img {
     margin: 0 auto;
   }
 }
-
