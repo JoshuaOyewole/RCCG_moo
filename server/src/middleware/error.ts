@@ -1,4 +1,4 @@
-/* import {Request, Response, NextFunction} from 'express';
+ import {Request, Response, NextFunction} from 'express';
 
 const err = (err: 
     { status: number; message: string; stack: any; }, req: Request, res:Response , next: NextFunction) => {
@@ -12,4 +12,4 @@ const err = (err:
     })
 }
 
-export default err; */
+export default err; 
