@@ -16,6 +16,9 @@ import registerRoute from "./routes/auth/register";
 import postRoute from "./routes/post/index";
 import userRoute from "./routes/users/index";
 import CountryCodeRoute from "./routes/country/index";
+import OTPRoute from "./routes/OTP/index";
+import forgetPWD from "./routes/reset_pwd/forgot_pwd";
+import resetPWD from "./routes/reset_pwd/reset_pwd";
 
 
 //DB INITIALIZATION
@@ -32,7 +35,10 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/post", postRoute);
 app.use("/user", userRoute);
-app.use("/country-codes", CountryCodeRoute);
+app.use("/country_codes", CountryCodeRoute);
+app.use("/otp", OTPRoute);
+app.use("/forgot_pwd", forgetPWD);
+app.use("/reset_pwd", resetPWD);
 
 //ERROR HANDLING MIDDLEWARE
 app.use(error);
