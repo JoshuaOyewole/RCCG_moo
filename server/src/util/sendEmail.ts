@@ -1,4 +1,4 @@
-import { EmailDetails } from "interfaces/OTPType";
+import { mailOptionsType } from "interfaces/OTPType";
 import nodemailer from "nodemailer";
 
 const { AUTH_EMAIL, AUTH_PASS } = process.env;
@@ -15,16 +15,11 @@ let transporter = nodemailer.createTransport({
 transporter.verify((error, success) => {
     if (error) {
         console.log(error);
-
-    }
-    else {
-        console.log("Ready for Message");
-        console.log("Success");
-
     }
 })
 
-const sendEmail = async (mailOptions:EmailDetails) =>{
+const sendEmail = async (mailOptions:mailOptionsType) =>{
+    
     try {
         await transporter.sendMail(mailOptions);
         return;
