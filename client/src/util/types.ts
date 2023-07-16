@@ -26,10 +26,15 @@ export type credentialsProps = {
 export type userInfoType = {
   firstname: string,
   lastname: string,
-  profilePixs?: string,
+  profilePicture?: string,
 
 }
 export type userType = {
   token: string,
   user: userInfoType
+}
+export type ResetPwdCredentialsProps = {
+  password: string,
+  email: string,
+  otp:string
 }
