@@ -7,8 +7,11 @@ import { PostBody } from "interfaces/PostType";
 
 //Post Creation Controller
 const createPost = async (req: Request, res: Response, next: NextFunction) => {
+    
+    const { creator_id, post_description, photos } = req.body;
+
     //Validation later 
-    if (req.body == null || undefined) {
+    if (creator_id && post_description && photos !== null || undefined) {
         try {
             const postBody: PostBody = req.body;
 
@@ -64,13 +67,12 @@ const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
 
     if (user_id !== undefined || "") {
         try {
-            const posts = await Post.find().sort({time_posted:1});
+            const posts = await Post.find().sort({ time_posted: 1 });
 
             //Check if there is a post in the DB
             if (posts.length >= 1) {
                 const filteredPost = posts.filter(post => post.creator.id !== user_id);//filter out current user post
-                res.status(200).json(posts);
-                //res.status(200).json(filteredPost);
+                res.status(200).json(filteredPost);
             }
             else {
                 res.status(404).json({

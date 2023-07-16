@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import bcrypt from "bcryptjs";
 import createError from "../../util/error";
 import jwt from "jsonwebtoken";
-import { sendOTP } from "util/OTP";
 
 //User Registration
 const register = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,10 +26,8 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       data: { firstname: response.firstname, lastname: response.lastname }
     });
   } catch (err) {
-    if (err.keyValue?.phone)
-      return next(createError(401, `Phone already Exist!`));
+    if (err.keyValue?.phone) {return next(createError(401, `Phone already Exist!`));}
     console.log(err);
-
     next(createError(400, `An Error occured! Try Again`));
   }
 };
@@ -56,7 +53,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     if (!isPasswordCorrect) {
       return next(createError(400, "Incorrect Password, Kindly Try Again!"));
     }
-    const { firstname, lastname, _id: id } = user; //Destructing password from the user details recieved...
+    const { firstname, lastname, profilePicture, _id: id } = user; //Destructing password from the user details recieved...
 
     const jwt_payload = {
       firstname, lastname, id
@@ -85,50 +82,17 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       status: 200,
       message: `Logged in successfully!`,
       details: {
-        firstname, lastname
+        firstname, lastname,profilePicture
       },
       token: token,
     });
   } catch (err) {
     console.log(err);
 
-    next(err);
+    next(createError(400, err.message));
   }
 };
 
-
-//Reset Password
-const resetPwd = async (req: Request, res: Response, next: NextFunction) => {
-
-  //get the token from the req
-  const { phone_no } = req.body;
-
-  if (phone_no) createError(401, 'Phone Number is Required');
-  try {
-    const existing = await User.findOne({ phone_no });
-
-    if (!existing) {
-      return res.status(200).json({
-        status: 404,
-        message: `Phone Number does not Exist!`,
-      });
-    }
-
-    const otpDetails = {
-      email: existing.email,
-      subject: 'Password Reset',
-      message: 'Enter the Code below to reset your Password',
-      duration: 1
-    }
-
-    const createdOTP = await sendOTP(otpDetails);
-
-    return res.status(200).json(createdOTP); 
-  }
-  catch (error) {
-    createError(405, error._message)
-  }
-};
 //LOGOUT
 const logout = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -147,5 +111,4 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-//const resetPwd = async (req,res,next) =>{}
-export { login, register, logout, resetPwd } 
+export { login, register, logout } 
