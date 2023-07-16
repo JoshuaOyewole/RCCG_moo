@@ -1,30 +1,48 @@
 import LoginStyles from "../login/_login.module.scss"
 import resetPwdImg from "../../assets/images/forget-pwd.png"
 import logo from "../../assets/images/logo.png"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
+import axios from "axios"
+import { toast } from "react-toastify"
 
 
-type credentialsProps = {
-    phone: string,
-}
+
 
 
 export default function index() {
-
-    const [credentials, setCredentials] = useState<credentialsProps>({
-        phone: "",
+    const [credentials, setCredentials] = useState<{ email: string }>({
+        email: "",
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const navigate = useNavigate();
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        /* 
-          1. Send the user credentials (phone & password) to the login API that will be provided
-          2. If Request is Successful, login the user to the Dixre dashboard ELSE
-          3. Throw up Error
-        */
+
+
+        //Validate if a user entered a value
+        if ((credentials.email.length <= 0) || (credentials.email == undefined)) toast.error("Kindly enter a Valid Email Address");
+
+
+        //trim whitespace from email value entered
+        const email = credentials.email.trim();
+
+        try {
+            const res = await axios.post('http://localhost:5000/forgot_pwd', { email });
+            if (res.data) {
+                toast.success(res.data.message);
+                //Redirect user to the page to enter OTP sent
+                setTimeout(() => {
+                    navigate('/reset-password')
+                }, 5000);
+                
+            }
+
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLButtonElement>) => {
@@ -36,6 +54,8 @@ export default function index() {
             )
         )
     }
+
+
     return (
         <div className={LoginStyles.login__container}>
 
@@ -58,14 +78,14 @@ export default function index() {
             {/* LOGIN FORM SECTION */}
             <div className={LoginStyles.login__FormContainer} >
                 <h2 className={LoginStyles.login__title}>Reset Your Password</h2>
-                <h2 className={LoginStyles.login__instruction}>Kindly enter your Phone Number to reset your password</h2>
+                <h2 className={LoginStyles.login__instruction}>Kindly enter your Email Address to reset your password</h2>
                 <form className={LoginStyles.loginForm} onSubmit={handleSubmit}>
                     <InputField
-                        type='number'
-                        name="phone"
-                        placeholder="Phone Number"
+                        type='email'
+                        name="email"
+                        placeholder="Email Address"
                         iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.phone}
+                        value={credentials.email}
                         onChange={handleChange}
                         required
                     />

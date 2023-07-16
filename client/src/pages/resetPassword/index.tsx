@@ -1,33 +1,44 @@
 import LoginStyles from "../login/_login.module.scss"
 import resetPwdImg from "../../assets/images/forget-pwd.png"
 import logo from "../../assets/images/logo.png"
-import LoginForm from "../login/LoginForm"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
+import { ResetPwdCredentialsProps } from "../../util/types"
+import { toast } from "react-toastify"
+import axios from "axios"
 
-
-type credentialsProps = {
-    pwd: string,
-    confirmPwd: string
-}
 
 
 export default function index() {
-
-    const [credentials, setCredentials] = useState<credentialsProps>({
-        pwd: "",
-        confirmPwd: ""
+    const navigate = useNavigate();
+    const [credentials, setCredentials] = useState<ResetPwdCredentialsProps>({
+        password: "",
+        email: "",
+        otp: ""
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        /* 
-          1. Send the user credentials (email & password) to the login API that will be provided
-          2. If Request is Successful, login the user to the Dixre dashboard ELSE
-          3. Throw up Error
-        */
+
+        // destructure credentials
+        const { email, password, otp } = credentials;
+
+        //Validate the Data inputed
+        if (!email && !password && !otp) return toast.error("All Fields are Required!")
+
+        try {
+            const res = await axios.post('http://localhost:5000/reset_pwd', { otp, newPassword: password, email });
+            if (res.data) {
+                toast.success(res.data.message);
+                return setTimeout(() => {
+                    navigate("/login")
+                }, 5000);
+            }
+        } catch (error: any) {
+            toast.error(error.response.data);
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLButtonElement>) => {
@@ -61,28 +72,41 @@ export default function index() {
             {/* LOGIN FORM SECTION */}
             <div className={LoginStyles.login__FormContainer} >
                 <h2 className={LoginStyles.login__title}>Reset Your Password</h2>
-                <h2 className={LoginStyles.login__instruction}>Please note that your password is case sensitive and must be at least 6 characters long</h2>
+                <h2 className={LoginStyles.login__instruction}>Kindly input the 4 digit OTP sent to your Email inorder to reset your Password</h2>
                 <form className={LoginStyles.loginForm} onSubmit={handleSubmit}>
                     <InputField
-                        type='password'
-                        name="pwd"
-                        placeholder="New Password"
+                        type='text'
+                        name="otp"
+                        placeholder="Enter OTP Code"
                         iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.pwd}
+                        value={credentials.otp}
                         onChange={handleChange}
                         required
                     />
                     <InputField
                         type='password'
-                        name="confirmPwd"
-                        placeholder="Confirm Password"
+                        name="password"
+                        placeholder="New Password"
                         iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.confirmPwd}
+                        value={credentials.password}
+                        onChange={handleChange}
+                        required
+                    />
+                    <InputField
+                        type='email'
+                        name="email"
+                        placeholder="Email address"
+                        iconClassName={CommonInputStyles.iconRight}
+                        value={credentials.email}
                         onChange={handleChange}
                         required
                     />
                     <input type="submit" value="Submit" className={LoginStyles.login__btn} />
                 </form>
+
+                <span style={{paddingTop:"2rem"}}>Return to Login Page?
+                    <NavLink to="/login" className={LoginStyles.fpassword}>  &nbsp; Login Now</NavLink>
+                </span>
             </div>
         </div>
     )

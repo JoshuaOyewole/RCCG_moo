@@ -44,16 +44,7 @@ const LoginForm = () => {
       navigate("/");//Assuming all things went well
 
     } catch (error: any) {
-      toast.error(` ${error.response.data.message}`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error(error.response.data.message);
     }
   }
 
