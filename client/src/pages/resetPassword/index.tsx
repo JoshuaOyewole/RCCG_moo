@@ -5,7 +5,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
-import { ResetPwdCredentialsProps } from "../../util/types"
+import { ResetPwdCredentialsProps} from "../../util/types"
 import { toast } from "react-toastify"
 import axios from "axios"
 
@@ -18,6 +18,9 @@ export default function index() {
         email: "",
         otp: ""
     })
+ 
+
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,7 +32,10 @@ export default function index() {
         if (!email && !password && !otp) return toast.error("All Fields are Required!")
 
         try {
-            const res = await axios.post('http://localhost:5000/reset_pwd', { otp, newPassword: password, email });
+            const res = await axios.post('http://localhost:5000/reset_pwd', {
+                otp, newPassword: password, email
+            });
+
             if (res.data) {
                 toast.success(res.data.message);
                 return setTimeout(() => {
@@ -104,7 +110,7 @@ export default function index() {
                     <input type="submit" value="Submit" className={LoginStyles.login__btn} />
                 </form>
 
-                <span style={{paddingTop:"2rem"}}>Return to Login Page?
+                <span style={{ paddingTop: "2rem" }}>Return to Login Page?
                     <NavLink to="/login" className={LoginStyles.fpassword}>  &nbsp; Login Now</NavLink>
                 </span>
             </div>

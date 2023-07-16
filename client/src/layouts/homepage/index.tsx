@@ -41,9 +41,9 @@ function HomepageLayout(props: HomepageProps) {
                     </button>
                     <div className={DashboardStyles.userProfile__container}>
 
-                        <img src={user.profilePixs} alt={`${user.firstname} profile picture`} className={DashboardStyles.userProfile__picture} />
+                        <img src={user?.profilePixs} alt={`${user?.firstname} profile picture`} className={DashboardStyles.userProfile__picture} />
 
-                        <h4 className={DashboardStyles.userProfile__userName}>{user.firstname} {user.lastname.slice(0, 1)}</h4>
+                        <h4 className={DashboardStyles.userProfile__userName}>{user?.firstname} {user?.lastname?.slice(0, 1)}</h4>
                         <button className={DashboardStyles.userProfile__icon}>
                             <FontAwesomeIcon
                                 icon={faCaretDown}
