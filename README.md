@@ -1,124 +1,128 @@
-<br/>
-<p align="center">
-  <a href="https://github.com/JoshuaOyewole/dixre-assessment">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+**Dixre Multi-user App Documentation**
 
-  <h3 align="center">ReadME Generator</h3>
+This documentation provides instructions on setting up and running a
+multi-users application that includes signup, login, password reset
+capabilities, and the ability to create and fetch posts. The application
+is built using React JS / Typescript as the frontend and communicates with a backend
+server built using NodeJs/Typescript, MongoDB, and ExpressJS.
 
-  <p align="center">
-    An Awesome ReadME Generator To Jumpstart Your Projects!
-</p>
+**Prerequisites**
 
-![Downloads](https://img.shields.io/github/downloads/ShaanCoding/ReadME-Generator/total) ![Contributors](https://img.shields.io/github/contributors/ShaanCoding/ReadME-Generator?color=dark-green) ![Issues](https://img.shields.io/github/issues/ShaanCoding/ReadME-Generator) ![License](https://img.shields.io/github/license/ShaanCoding/ReadME-Generator) 
+Before running the application locally, ensure that you have the
+following prerequisites installed:
 
-## Table Of Contents
+-   Node.js (version 16 or higher)
 
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Authors](#authors)
-* [Acknowledgements](#acknowledgements)
+-   Git
 
-## About The Project
+    **Installation**
 
-![Screen Shot](images/screenshot.png)
+To install and run the  application locally, follow these
+steps:
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+1.  Clone the repository from GitHub:
 
-Here's why:
+bashCopy code
 
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+git clone \<repository_url\>
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
+2.  Change to the project directory:
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+bashCopy code
 
-## Built With
+cd dixre-app
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+3.  Install the required dependencies using npm or yarn:
 
-## Getting Started
+bashCopy code
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-* npm
-
-```sh
-npm install npm@latest -g
-```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-
-2. Clone the repo
-
-```sh
-git clone https://github.com/your_username_/Project-Name.git
-```
-
-3. Install NPM packages
-
-```sh
 npm install
-```
 
-4. Enter your API in `config.js`
+or
 
-```JS
-const API_KEY = 'ENTER YOUR API';
-```
+bashCopy code
 
-## Usage
+yarn install
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+**Configuration**
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Before running the application, you need to configure the backend server
+URL. Follow these steps:
 
-## Roadmap
+1.  Open the **.env** file in the project root directory.
 
-See the [open issues](https://github.com/ShaanCoding/ReadME-Generator/issues) for a list of proposed features (and known issues).
+2.  Set the value of the **REACT_APP_API_URL** variable to the URL of
+    the backend server.
 
-## Contributing
+bashCopy code
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/ShaanCoding/ReadME-Generator/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
-* Please make sure you check your spelling and grammar.
-* Create individual PR for each suggestion.
-* Please also read through the [Code Of Conduct](https://github.com/ShaanCoding/ReadME-Generator/blob/main/CODE_OF_CONDUCT.md) before posting your first idea as well.
+REACT_APP_API_URL=http://localhost:8000/api
 
-### Creating A Pull Request
+Replace **http://localhost:8000/api** with the actual URL of your
+backend server.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+**Running the Application**
 
-## License
+To run the multi-users application locally, execute the following
+command in the project directory:
 
-Distributed under the MIT License. See [LICENSE](https://github.com/ShaanCoding/ReadME-Generator/blob/main/LICENSE.md) for more information.
+bashCopy code
 
-## Authors
+npm start
 
-* **Shaan Khan** - *Comp Sci Student* - [Shaan Khan](https://github.com/ShaanCoding/) - *Built ReadME Template*
+This will start the development server, and the application will be
+accessible at **http://localhost:3000** in your web browser.
 
-## Acknowledgements
+**Usage**
 
-* [ShaanCoding](https://github.com/ShaanCoding/)
-* [Othneil Drew](https://github.com/othneildrew/Best-README-Template)
-* [ImgShields](https://shields.io/)
+Once the application is running, you can use it as follows:
+
+1.  Open your web browser and navigate to **http://localhost:3000**.
+
+2.  Signup: Click on the \"Signup\" link to create a new user account.
+    Provide the required details, such as username, email, and password,
+    to register.
+
+3.  Login: After signing up, click on the \"Login\" link to enter your
+    credentials and access the application.
+
+4.  Password Reset: If you forget your password, click on the \"Forgot
+    password?\" link on the login page. Follow the instructions to reset
+    your password.
+
+5.  Create Posts: Once logged in, you can create new posts by clicking
+    on the \"Create Post\" button. Provide the required information,
+    such as title and content, and submit the form.
+
+6.  Fetch Posts: The application automatically fetches a list of posts
+    from the backend server. The posts are displayed on the main page in
+    batches of 10, sorted by the latest. Use the navigation buttons to
+    view older or newer posts.
+
+    **Troubleshooting**
+
+If you encounter any issues while running the application, please try
+the following steps:
+
+1.  Ensure that all the dependencies are installed correctly by running
+    **npm install** or **yarn install** again.
+
+2.  Double-check the configuration in the **.env** file, especially the
+    **REACT_APP_API_URL** variable, to ensure it points to the correct
+    backend server.
+
+3.  Make sure the backend server is running and accessible at the
+    specified URL.
+
+4.  Check the console output in your browser\'s developer tools for any
+    error messages or warnings.
+
+
+**Conclusion**
+
+Congratulations! You have successfully set up and run the dixre
+application locally. You can now explore its signup, login, password
+reset capabilities, and the ability to create and fetch posts. Enjoy
+using the application!
+
+
