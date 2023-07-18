@@ -35,16 +35,26 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post('http://localhost:5000/login', credentials);
+      if (res.data) {
+        localStorage.setItem("token", res.data.token)
+        localStorage.setItem("firstname", res.data.details.firstname)
+        localStorage.setItem("lastname", res.data.details.lastname)
+        localStorage.setItem("profilePicture", res.data.details.profilePicture)
+        localStorage.setItem("user_id", res.data.details.id)
 
-      localStorage.setItem("user", JSON.stringify({
-        token: res.data.token,
-        user: res.data.details
-      }))
+        navigate("/");//Assuming all things went well
+      }
 
-      navigate("/");//Assuming all things went well
+
+     
 
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      if (error.message == "Network Error") {
+        toast.error(error.message)
+      }
+      else {
+        toast.error(error.response.data.message);
+      }
     }
   }
 
