@@ -8,6 +8,10 @@ const Sidebar = () => {
     const navigate = useNavigate();
 
     const logout = () => {
+        localStorage.removeItem('firstname');
+        localStorage.removeItem('lastname');
+        localStorage.removeItem('profilePicture');
+        localStorage.removeItem('user_id');
         localStorage.removeItem('token');
         navigate('/login')
     }
@@ -21,13 +25,8 @@ const Sidebar = () => {
                 </li>
 
                 <li className={DashboardStyles.sidebar__navItem}>
-                    <NavLink className={DashboardStyles.sidebar__navLink} to="#createPost">
-                        <FontAwesomeIcon icon={faCirclePlus} /> <span>Create Post</span>
-                    </NavLink>
-                </li>
-                <li className={DashboardStyles.sidebar__navItem}>
-                    <NavLink className={DashboardStyles.sidebar__navLink} to="#profile">
-                        <FontAwesomeIcon icon={faUser} /> <span>Profile</span>
+                    <NavLink className={DashboardStyles.sidebar__navLink} to="#refreshPost">
+                        <FontAwesomeIcon icon={faCirclePlus} /> <span>Refresh Post</span>
                     </NavLink>
                 </li>
                 <li className={DashboardStyles.sidebar__navItem}>

@@ -6,7 +6,8 @@ import { faCaretDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icon
 import Sidebar from "./sidebar";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import UserContext from "../../context/userContext"
+import UserContext from "../../context/UserContext";
+//import { userType } from "../../util/types";
 
 
 
@@ -17,9 +18,7 @@ type HomepageProps = {
 
 function HomepageLayout(props: HomepageProps) {
     const { children } = props;
-
-    const user = useContext(UserContext)
-
+    const { firstname, lastname, profilePicture } = useContext(UserContext);//User context
 
     return (
         <div className={DashboardStyles.dashboard__container}>
@@ -41,9 +40,9 @@ function HomepageLayout(props: HomepageProps) {
                     </button>
                     <div className={DashboardStyles.userProfile__container}>
 
-                        <img src={user?.profilePixs} alt={`${user?.firstname} profile picture`} className={DashboardStyles.userProfile__picture} />
+                        <img src={profilePicture ? profilePicture : ""} alt={`${firstname} profile picture`} className={DashboardStyles.userProfile__picture} />
 
-                        <h4 className={DashboardStyles.userProfile__userName}>{user?.firstname} {user?.lastname?.slice(0, 1)}</h4>
+                        <h4 className={DashboardStyles.userProfile__userName}>{firstname} {lastname?.slice(0, 1)}</h4>
                         <button className={DashboardStyles.userProfile__icon}>
                             <FontAwesomeIcon
                                 icon={faCaretDown}
