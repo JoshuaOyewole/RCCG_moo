@@ -22,8 +22,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     const response = await User.create(newUser);
     res.status(200).json({
       success: true,
-      message: ` Registration successful!`,
-      data: { firstname: response.firstname, lastname: response.lastname }
+      message: ` Registration successful!`
     });
   } catch (err) {
     if (err.keyValue?.phone) {return next(createError(401, `Phone already Exist!`));}
@@ -82,7 +81,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       status: 200,
       message: `Logged in successfully!`,
       details: {
-        firstname, lastname,profilePicture
+        firstname, lastname,profilePicture, id
       },
       token: token,
     });

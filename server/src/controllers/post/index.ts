@@ -7,7 +7,7 @@ import { PostBody } from "interfaces/PostType";
 
 //Post Creation Controller
 const createPost = async (req: Request, res: Response, next: NextFunction) => {
-    
+
     const { creator_id, post_description, photos } = req.body;
 
     //Validation later 
@@ -62,17 +62,39 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 
 //GetAllPost Controller
 const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
-    const user_id = req.query.user_id;//should be req.user.id 
+
+    try {
+        const user_id = req.query.user_id;//should be req.user.id 
 
 
-    if (user_id !== undefined || "") {
-        try {
-            const posts = await Post.find().sort({ time_posted: 1 });
+        const page: string | undefined = req.query.page as string;
+        const limit: string | undefined = req.query.limit as string;
+
+        const pageNumber = parseInt(page as string);
+        const limitNumber = parseInt(limit as string);
+
+        const startIndex = (pageNumber - 1) * limitNumber;
+        const endIndex = pageNumber * limitNumber;
+
+
+        if (user_id !== undefined || "") {
+
+            const posts = await Post.find()
+                .limit(limitNumber)
+                .skip(startIndex)
+                .sort()
+                .exec();
+
+            const totalCount = await Post.countDocuments();
 
             //Check if there is a post in the DB
             if (posts.length >= 1) {
                 const filteredPost = posts.filter(post => post.creator.id !== user_id);//filter out current user post
-                res.status(200).json(filteredPost);
+                res.status(200).json({
+                    data: filteredPost,
+                    currentPage: pageNumber,
+                    totalPages: Math.ceil(totalCount / limitNumber),
+                });
             }
             else {
                 res.status(404).json({
@@ -81,15 +103,16 @@ const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
                 });
             }
 
-        } catch (error) {
-            next(createError(400, `An Error occured! Try Again`));
+        }
+        else {
+            res.status(400).json({
+                success: true,
+                message: ` Kindly pass a User ID`,
+            });
         }
     }
-    else {
-        res.status(400).json({
-            success: true,
-            message: ` Kindly pass a User ID`,
-        });
+    catch (error) {
+        next(createError(400, `An Error occured! Try Again`));
     }
 }
 
