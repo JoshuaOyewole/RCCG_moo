@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "API for Dixre Assessment",
   "main": "./src/index.ts ",
-  "type": "module",
   "scripts": {
     "start": "node src/index.ts"
   },
