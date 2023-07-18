@@ -5,13 +5,14 @@ import {
     getDownloadURL
 } from "firebase/storage";
 import { storage } from "../../../config/firebaseConfig";
-import { faCamera, faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
+import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../../context/userContext";
+import { useContext, useState } from "react";
+import UserContext from "../../../context/UserContext";
 import { v4 } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getToken } from "../../../util/auth";
 
 
 
@@ -19,10 +20,21 @@ interface IModalProps {
 }
 
 const Modal = ({ }: IModalProps) => {
-    const user = useContext(UserContext);//Fetches User details (name,profile pixs)
+    const { firstname, lastname, profilePicture } = useContext(UserContext);//Fetches User details (name,profile pixs)
+    const creator_id = localStorage.getItem("user_id");
+    const token = getToken();
     const [imageUpload, setImageUpload] = useState<FileList | null>({} as FileList);
     const [postDesc, setPostDesc] = useState<string>('');
 
+
+    //Clear Post Fields
+    const clearFields = () => {
+        setPostDesc("");
+        setImageUpload(null)
+    }
+
+    //Handle File Input
+    const onchange = (event: React.ChangeEvent<HTMLInputElement>) => setImageUpload(event.target.files)
 
     //Handle Uploading of Post
     const uploadPost = async (e: React.FormEvent) => {
@@ -41,26 +53,36 @@ const Modal = ({ }: IModalProps) => {
 
                     const snapshot = await uploadBytes(imageRef, blob);
                     const url = await getDownloadURL(snapshot.ref)
-                    console.log(url);
                     postURLs.push(url)
                 }
-                const payload = { creator_id: "64af540d576b8737651135a4", post_description: postDesc, photos: postURLs };
+                const payload = { 
+                    creator_id, 
+                    post_description: postDesc, 
+                    photos: postURLs 
+                };
 
-                const response = await axios.post(`http://localhost:5000/post/create`, payload);
+                const response = await axios.post(`http://localhost:5000/post/create`, payload, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
 
-                if (response.data) toast.success(response.data.message);
+                if (response.data) {
+                    /* CLEAR INPUT FIELDS and display a Success Message */
+                    clearFields();
+                    toast.success(response.data.message);
+                }
+
             } catch (error) {
                 toast.error('An Error Occured while Uploading  your Post');
             }
         }
-        else{
+        else {
             toast.error('Photos must be Greater than 2 and less than 6')
         }
-        
+
     }
 
-    //Handle File Input
-    const onchange = (event: React.ChangeEvent<HTMLInputElement>) => setImageUpload(event.target.files)
 
 
     return <div className={ModalStyles.modal__container}>
@@ -69,14 +91,14 @@ const Modal = ({ }: IModalProps) => {
 
         <div>
             <div className={`${ModalStyles.post__post_header} mt-1`}>
-                <img src={user.profilePixs} className={ModalStyles.post__user_pixs} alt={user.firstname} />
+                <img src={profilePicture ? profilePicture : ""} className={ModalStyles.post__user_pixs} alt={firstname ? firstname : ""} />
                 <div className={ModalStyles.post__post_info}>
-                    <p className={ModalStyles.post__user_name}>{user.firstname} {user.lastname}</p>
+                    <p className={ModalStyles.post__user_name}>{firstname} {lastname}</p>
                     <p>Public</p>
                 </div>
             </div>
             <form className={ModalStyles.modal__post_inputField} onSubmit={uploadPost}>
-                <textarea name="post_desc" id="post_desc" className={ModalStyles.modal__description} value={postDesc} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPostDesc(e.target.value)} required></textarea>
+                <textarea name="post_desc" id="post_desc" className={ModalStyles.modal__description} value={postDesc} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPostDesc(e.target.value)} required placeholder={`Whats on your mind ${firstname}?`}></textarea>
                 <div className={`divider ${ModalStyles.modal__divider}`}></div>
                 <p className={ModalStyles.modal__addPhotoText}>
                     <span>  Add to your Post</span>
