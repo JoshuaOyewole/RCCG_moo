@@ -15,15 +15,19 @@ export type postType = {
   time_posted: string,
 }
 
-export type credentialsProps = {
+export type signupCredentialsProps = {
   fname: string,
   lname: string,
   phone: string,
+  gender: string,
+  countryCode: string,
   password: string,
-  email: string
+  email: string,
+  profilePicture?: string
 }
 
 export type userInfoType = {
+  id?: string,
   firstname: string,
   lastname: string,
   profilePicture?: string,
@@ -36,5 +40,17 @@ export type userType = {
 export type ResetPwdCredentialsProps = {
   password: string,
   email: string,
-  otp:string
+  otp: string
+}
+
+export type countryCodes = {
+  _id: string,
+  continent_name: string,
+  country_code: string,
+  country_name: string,
+  continent_code: string,
+  capital_name: string,
+  currency_code: string,
+  phone_code: string,
+  three_letter_country_code: string,
 }
