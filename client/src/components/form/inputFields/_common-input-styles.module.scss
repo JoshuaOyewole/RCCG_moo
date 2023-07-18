@@ -2,12 +2,19 @@
 @use "../../../styles/abstracts/mixins" as mixin;
 
 .input_container,
-  .input-label {
-    margin-bottom: 2rem;
-    color: variable.$secondary;
-  }
+.input-label {
+  margin-bottom: 2rem;
+  color: variable.$secondary;
+}
 
-
+.country_code {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 51%;
+  color: #545f7d;
+  font-size: 13px;
+  padding: 0 0.1rem;
+}
 .input_field_container {
   flex-basis: 49%;
   border-radius: 5px;
@@ -86,10 +93,10 @@
   gap: 8px;
   &:not(:first-child) {
     margin: 10px 0;
-}
+  }
 }
 
-.iconRight{
+.iconRight {
   margin-right: 2rem;
   background: transparent;
   color: variable.$Dixre-Main;
