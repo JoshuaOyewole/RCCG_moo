@@ -4,7 +4,7 @@
   "description": "API for Dixre Assessment",
   "main": "./src/index.ts ",
   "scripts": {
-    "start": "nodemon src/index.ts"
+    "start": "node src/index.ts"
   },
   "license": "MIT",
   "author": "Joshua Oyewole",
