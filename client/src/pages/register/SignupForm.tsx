@@ -3,36 +3,41 @@ import LoginStyle from "../login/_login.module.scss"
 import CommonInputStyle from "../../components/form/inputFields/_common-input-styles.module.scss";
 import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios";
-import intlTelInput from 'intl-tel-input';
-import 'intl-tel-input/build/css/intlTelInput.css';
+import CountryCode from "../../context/countries.json"
 import { toast } from "react-toastify"
-import { credentialsProps } from "../../util/types"
+import { signupCredentialsProps } from "../../util/types"
+import { removeZero } from "../../util/validateInput";
 
 const initialValue = {
     fname: "",
     lname: "",
     phone: "",
     password: "",
-    email: ""
+    email: "",
+    profilePicture: "",
+    gender: '',
+    countryCode: '234',
 }
-
 
 const SignupForm = () => {
     const navigate = useNavigate();
-    const [gender, setGender] = useState<String>("")
-    const inputRef = useRef<HTMLInputElement>({} as HTMLInputElement);
-    const [credentials, setCredentials] = useState<credentialsProps>(initialValue)
+    const [credentials, setCredentials] = useState<signupCredentialsProps>(initialValue as signupCredentialsProps);
+    const default_profile_pixs = "https://cdn-icons-png.flaticon.com/512/149/149071.png?w=740&t=st=1689610177~exp=1689610777~hmac=7ffde0a60b32927acefe64c0fabaa6936e30a2c4078d14d7d494cd6a16fa4b0f";
 
-/*   useEffect(() => {
-    const input = document.querySelector("#phone");
-    console.log(input);
-    intlTelInput(input, {
-        utilsScript: "path/to/utils.js"
-    });  
-  }, []) */
-  
-    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setGender(e.target.value);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCredentials(
+            (prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+            }
+            )
+        );
+    }
+
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setCredentials((prevCredentials) => (
+            { ...prevCredentials, [event.target.name]: event.target.value }
+        ))
     }
     //Function to Handle Signup Action
     const handleSubmit = async (e: React.FormEvent) => {
@@ -40,10 +45,18 @@ const SignupForm = () => {
 
         if (credentials.password.length >= 6) {
             //Destructure credentials into LoginPayload
-            const loginPayload = { gender: gender.toLowerCase(), firstname: credentials.fname, lastname: credentials.lname, phone: credentials.phone, password: credentials.password, email:credentials.email};
+            const registerPayload = {
+                gender: credentials.gender.toLowerCase(),
+                firstname: credentials.fname,
+                lastname: credentials.lname,
+                phone: `${credentials.countryCode}${removeZero(credentials.phone)}`,
+                password: credentials.password,
+                email: credentials.email, profilePicture: credentials.profilePicture !== "" ? credentials.profilePicture : default_profile_pixs
+            };
+
             try {
-                const res = await axios.post('http://localhost:5000/register', (loginPayload));
-                localStorage.setItem("token", res.data.token)
+                const res = await axios.post('http://localhost:5000/register', (registerPayload));
+
                 toast.success(res.data.message);
                 setTimeout(() => {
                     navigate("/login");//Assuming all things went well
@@ -56,17 +69,6 @@ const SignupForm = () => {
         else {
             toast.error("Password length must be above 6 characters")
         }
-    }
-    //Handle Credential State when a change Event is Fired
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCredentials(
-            (prev) => ({
-                ...prev,
-                [e.target.name]: e.target.value,
-
-            }
-            )
-        );
     }
 
     return (
@@ -97,16 +99,26 @@ const SignupForm = () => {
             </div>
             <div className={LoginStyle.SignupForm__wrapper}>
                 <div className={CommonInputStyle.input_field_container} >
-                    <input
-                        type="tel"
-                        name="phone"
-                        id="phone"
-                        ref={inputRef}
-                        placeholder="Phone Number"
-                        value={credentials.phone}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div style={{ display: "flex" }}>
+                        <select name="countryCode" className={CommonInputStyle.country_code} required onChange={handleSelect}>
+                            <option value="234">NGA (234)</option>
+                            {
+                                CountryCode.map((country, index) => {
+                                    return <option value={country.phone_code} key={index}>{country.three_letter_country_code} ({country.phone_code})</option>
+                                })
+                            }
+                        </select>
+                        <input
+                            type="tel"
+                            name="phone"
+                            id="phone"
+                            placeholder="Phone Number"
+                            value={credentials.phone}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
                 </div>
 
                 <select placeholder="Gender" name="gender" required className={`${LoginStyle.SignupForm__col5} ${LoginStyle.SignupForm__select}`} onChange={handleSelect}>
@@ -147,7 +159,6 @@ const SignupForm = () => {
                     Login
                 </NavLink>
             </span>
-
 
             <input type="submit" value="Signup" className={LoginStyle.login__btn} />
         </form>
