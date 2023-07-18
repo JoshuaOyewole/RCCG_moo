@@ -1,9 +1,9 @@
 import express from 'express';
-import { insertCountriesInfo } from "../../controllers//countryCodes/index";
+import { getCountryCodes, insertCountriesInfo } from "../../controllers//countryCodes/index";
 
 const router = express.Router();
 
 //CREATE COUNTRY CODES
-router.post('/multiple', insertCountriesInfo);
+router.post('/multiple', insertCountriesInfo).get("/", getCountryCodes)
 
 export default router;

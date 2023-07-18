@@ -52,20 +52,29 @@ URL. Follow these steps:
 -   Set the value of the **REACT_APP_API_URL** variable to the URL of
     the backend server.
 
-    ```REACT_APP_API_URL=http://localhost:5000/api`
+
+    `REACT_APP_API_URL=http://localhost:5000/api`
+
 
 -   Replace **http://localhost:5000/api** with the actual URL of your
     backend server.
+
 
 2.  Open the **.env** file in the **server/** directory.
 
 -   Set the following values for with the correct ones.
 
-    ```MONGO_URL=mongodb://127.0.0.1:27017/dixre```
-    ```JWT_SECRET = orisfina@is+going_tobe#a%Billionaire^before$2023)ends```
-    ```PORT= 5000```
-    ```AUTH_EMAIL: Your Email Adress (Preferable hotmail)```
-    ```AUTH_PASS: your Email Password```
+    `MONGO_URL=mongodb://127.0.0.1:27017/dixre`
+
+    `JWT_SECRET = YOUR JWT SECRET CODE`
+
+    `PORT= 5000`
+
+
+    `AUTH_EMAIL: Your Email Adress (Preferable hotmail)`
+
+
+    `AUTH_PASS: your Email Password`
 
 ## Running the Application
 
@@ -108,7 +117,7 @@ Once the application is running, you can use it as follows:
     from the backend server. The posts are displayed on the main page in
     batches of 10, sorted by the latest and loaded as your keep scrolling (Infinite Scrolling). You can refresh posts by clicking on the refresh post button
 
-## Troubleshooting**
+## Troubleshooting
 
 If you encounter any issues while running the application, please try
 the following steps:
@@ -127,17 +136,9 @@ the following steps:
     error messages or warnings.
 
 ## Screenshot
-![Image of Login Page](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-![Image of Sign up Page](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-![Image of Reset Password Page](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-![Image of Homepage](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-
 
 ### Mobile View
-![Image of Login Page](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-![Image of Sign up Page](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-![Image of Reset Password Page](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
-![Image of Homepage](https://github.com/tusharchaudhari30/Student-Certificate/blob/master/snapshot-student/homepage.png)
+
 
 **Conclusion**
 

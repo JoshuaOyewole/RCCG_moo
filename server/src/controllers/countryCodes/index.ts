@@ -17,24 +17,32 @@ const insertCountriesInfo = async (req: Request, res: Response, next: NextFuncti
     }
 
     else {
-        //Check if the country codes to be added already exist
-        //const allCountryCodes = await Country.find(payload);
-    
-            try {
 
-                await Country.create(payload);
-                res.status(200).json({
-                    success: true,
-                    message: `Data Successfully added`
-                });
-            } catch (error) {
-                console.log(error);
+        try {
 
-                next(createError(400, `An Error occured! Try Again`));
-            }
+            await Country.create(payload);
+            res.status(200).json({
+                success: true,
+                message: `Data Successfully added`
+            });
+        } catch (error) {
+            console.log(error);
+
+            next(createError(400, `An Error occured! Try Again`));
+        }
 
     }
 
 }
 
-export { insertCountriesInfo };
+const getCountryCodes = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const countrycodes = await Country.find();
+        res.status(200).json(countrycodes);
+    } catch (error) {
+        next(createError(400, `An Error occured! Try Again`));
+    }
+
+}
+
+export { insertCountriesInfo, getCountryCodes };
