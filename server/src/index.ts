@@ -24,7 +24,7 @@ import resetPWD from "./routes/reset_pwd/reset_pwd";
 //DB INITIALIZATION
 dbConnect();
 //PORT
-const PORT = process.env.PORT;
+const PORT = process.env.PORT;  
 
 app.use(bodyParser.json())
 app.use(cors());
