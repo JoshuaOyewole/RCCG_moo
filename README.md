@@ -102,8 +102,7 @@ Once the application is running, you can use it as follows:
 
 2.  Login: You will be prompted to Login if you have a login credential (Phone Number and password) or proceed to Signup on your first   usage: Enter your login credentials after signing up and access the application.
 
-3.  Sign up: Provide the required details, such as Firstname, Lastname, Phone Number, Gender, email, and password,
-    to register.
+3.  Sign up: Provide the required details, such as Firstname, Lastname, Phone   Number, Gender, email, and password, to register.
 
 4.  Password Reset: If you forget your password, click on the \"Forgot
     password?\" link on the login page. Follow the instructions to reset
