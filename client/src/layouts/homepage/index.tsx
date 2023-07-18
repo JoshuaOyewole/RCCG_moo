@@ -2,12 +2,10 @@ import DashboardStyles from "./_userDashboardLayout.module.scss"
 import logo from "../../assets/images/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { faCaretDown, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import UserContext from "../../context/UserContext";
-//import { userType } from "../../util/types";
+import { getUserDatas } from "../../util/auth";
 
 
 
@@ -18,7 +16,7 @@ type HomepageProps = {
 
 function HomepageLayout(props: HomepageProps) {
     const { children } = props;
-    const { firstname, lastname, profilePicture } = useContext(UserContext);//User context
+    const { firstname, lastname, profilePicture } = getUserDatas();//User context
 
     return (
         <div className={DashboardStyles.dashboard__container}>

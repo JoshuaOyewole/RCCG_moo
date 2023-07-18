@@ -7,12 +7,11 @@ import {
 import { storage } from "../../../config/firebaseConfig";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
-import UserContext from "../../../context/UserContext";
+import { useState } from "react";
 import { v4 } from "uuid";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getToken } from "../../../util/auth";
+import { getUserDatas } from "../../../util/auth";
 
 
 
@@ -20,9 +19,7 @@ interface IModalProps {
 }
 
 const Modal = ({ }: IModalProps) => {
-    const { firstname, lastname, profilePicture } = useContext(UserContext);//Fetches User details (name,profile pixs)
-    const creator_id = localStorage.getItem("user_id");
-    const token = getToken();
+    const { firstname,token, lastname, profilePicture, user_id:creator_id } = getUserDatas();//Fetches User details (name,profile pixs)
     const [imageUpload, setImageUpload] = useState<FileList | null>({} as FileList);
     const [postDesc, setPostDesc] = useState<string>('');
 
