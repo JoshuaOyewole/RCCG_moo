@@ -1,12 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "API for Dixre Assesment",
+  "description": "API for Dixre Assessment",
   "main": "./src/index.ts ",
   "scripts": {
-    "build": "nodemon src/index.ts",
-    "start": "nodemon src/index.ts",
-    "dev": "nodemon src/index.ts"
+    "start": "nodemon src/index.ts"
   },
   "license": "MIT",
   "author": "Joshua Oyewole",
