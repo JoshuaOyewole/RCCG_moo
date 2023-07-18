@@ -1,13 +1,15 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "description": "API for Dixre Assesment",
   "main": "./src/index.ts ",
   "scripts": {
-    "build": "node src/index.ts",
-    "start": "node dist/index.ts",
+    "build": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
     "dev": "nodemon src/index.ts"
   },
   "license": "MIT",
+  "author": "Joshua Oyewole",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^9.0.2",
