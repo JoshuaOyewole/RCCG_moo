@@ -1,19 +1,15 @@
 import createPostStyles from './_createpost.module.scss'
-import { useContext } from 'react';
-import UserContext from '../../../context/UserContext';
+import { getUserDatas } from './util/auth';
 
-type Props = {
-
-}
+type Props = {}
 
 const CreatePost = (props: Props) => {
     const { } = props;
 
-    const {profilePicture,firstname,lastname} = useContext(UserContext);//User Context
-   
+    const { profilePicture, firstname, lastname } = getUserDatas();//User Context
 
     const show_create_post_modal = () => {
-        alert('Clciked')
+        //to be added 
     }
     return (
         <>
