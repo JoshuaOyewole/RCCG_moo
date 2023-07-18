@@ -25,16 +25,16 @@ export default function Post(props: IPostProps) {
         <div className={PostStyles.post__post}>
             {/* Header */}
             <div className={PostStyles.post__post_header}>
-                <img src={props.userImg} className={PostStyles.post__user_pixs} alt={props.username} />
+                <img src={props?.userImg} className={PostStyles.post__user_pixs} alt={props?.username} />
                 <div className={PostStyles.post__post_info}>
-                    <p className={PostStyles.post__user_name}>{props.username}</p>
-                    <p>{dayjs(props.timeposted).fromNow()}</p>
+                    <p className={PostStyles.post__user_name}>{props?.username}</p>
+                    <p>{dayjs(props?.timeposted).fromNow()}</p>
                 </div>
             </div>
             {/* Description */}
             <span>
-                <p id={props.postID}>
-                    {props.post_desc}
+                <p id={props?.postID}>
+                    {props?.post_desc}
                     {
                         /* 
                         Once upon a time, in a quaint little village, lived a young girl named Lily. She possessed a remarkable talent for painting, but her dreams were confined within the boundariesof her small world. Lily longed to showcase her art to the world, but fear held her back.
@@ -55,7 +55,7 @@ export default function Post(props: IPostProps) {
             {/* Photos */}
             <div className={PostStyles.post__post_photos}>
                 {
-                    props.photos.map((photo, index) => {
+                    props.photos?.map((photo, index) => {
                         return <div className={PostStyles.post__post_photoContainer} key={index}>
                             <img src={photo} alt="Photo 1" />
                         </div>
