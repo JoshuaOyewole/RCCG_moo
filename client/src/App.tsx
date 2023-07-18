@@ -10,27 +10,20 @@ import Error from "./pages/404/index";
 import ProtectedRoute from "./util/ProtectedRoute";
 
 
-
 function App() {
-
 
   return (
     <>
       <ToastContainer />
       <Routes>
-
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Homepage />
-          </ProtectedRoute>
-        }
-        />
-
         <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Homepage />} />
+        </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/reset-pwdLink" element={<ResetPwdLink />} />
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={<Error />} /> *
       </Routes>
     </>
 
