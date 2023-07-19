@@ -53,10 +53,10 @@ URL. Follow these steps:
     the backend server.
 
 
-    `REACT_APP_API_URL=http://localhost:5000/api`
+    `REACT_APP_API_URL=https://dixre-api.onrender.com//api`
 
 
--   Replace **http://localhost:5000/api** with the actual URL of your
+-   Replace **https://dixre-api.onrender.com//api** with the actual URL of your
     backend server.
 
 
