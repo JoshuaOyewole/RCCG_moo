@@ -97,7 +97,7 @@ const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
                 });
             }
             else {
-                res.status(404).json({
+                res.status(200).json({
                     success: true,
                     message: ` No Post Available `,
                 });
