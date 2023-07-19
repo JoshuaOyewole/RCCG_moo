@@ -6,6 +6,10 @@ capabilities, and the ability to create and fetch posts. The application
 is built using React JS / Typescript as the frontend and communicates with a backend
 server built using NodeJs/Typescript, MongoDB, and ExpressJS.
 
+#### API Documentation 
+
+[API DOC] ("https://dixre-api-doc.netlify.app")
+
 ## Getting Started
 
 Before running the application locally, ensure that you have the
@@ -136,7 +140,10 @@ the following steps:
 
 ## Screenshot
 
-### Mobile View
+![login](https://firebasestorage.googleapis.com/v0/b/dixre-assessment-fd868.appspot.com/o/images%2Flogin.png?alt=media&token=990f41fa-60c1-4f63-bf89-ee2350012a8f)  
+![register](https://firebasestorage.googleapis.com/v0/b/dixre-assessment-fd868.appspot.com/o/images%2Fsignup.png?alt=media&token=3ccc1f50-96bc-4269-8cd0-cd995f8c67a3)  
+![Reset Password](https://firebasestorage.googleapis.com/v0/b/dixre-assessment-fd868.appspot.com/o/images%2Freset-password.png?alt=media&token=d4b347cc-27f2-4e3f-8d89-29b7ad132e88)  
+![Dashboard](https://firebasestorage.googleapis.com/v0/b/dixre-assessment-fd868.appspot.com/o/images%2Fhomepage.png?alt=media&token=792fab0a-faf2-44d4-bcea-a5d700b814f0)  
 
 
 **Conclusion**
