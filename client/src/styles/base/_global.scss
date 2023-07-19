@@ -79,16 +79,16 @@ img {
 /* Custom Scroll Bar */
 ::-webkit-scrollbar {
   width: 5px;
-  max-height: 5px;
+  max-height: 10px;
 
   @include mixin.media("phone") {
-    width: 2px;
-    max-height: 2px;
+    width: 5px;
+    max-height: 5px;
   }
 
   @media (max-height: "600px") {
-    width: 3.5px;
-    max-height: 2px;
+    width: 5px;
+    max-height: 5px;
   }
 }
 .iti__flag {
