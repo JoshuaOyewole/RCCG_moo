@@ -32,7 +32,7 @@ export default function index() {
         if (!email && !password && !otp) return toast.error("All Fields are Required!")
 
         try {
-            const res = await axios.post('http://localhost:5000/reset_pwd', {
+            const res = await axios.post('https://dixre-api.onrender.com//reset_pwd', {
                 otp, newPassword: password, email
             });
 

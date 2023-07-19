@@ -30,7 +30,7 @@ export default function index() {
         const email = credentials.email.trim();
 
         try {
-            const res = await axios.post('http://localhost:5000/forgot_pwd', { email });
+            const res = await axios.post('https://dixre-api.onrender.com//forgot_pwd', { email });
             if (res.data) {
                 toast.success(res.data.message);
                 //Redirect user to the page to enter OTP sent

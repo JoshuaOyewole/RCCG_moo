@@ -13,11 +13,6 @@ type credentialsProps = {
   password: string
 }
 
-/* 
-TODO
-1. Please in a REACT TOAST to display logging and also diplay successfully logged in
-You can use the promise method of React Toast
- */
 
 const LoginForm = () => {
   const [InputType, Icon] = usePasswordToggle();
@@ -28,13 +23,14 @@ const LoginForm = () => {
     password: ""
   })
 
+//console.log(`${process.env.REACT_APP_API_URL}`);
 
   ///Function to Handle Login Action
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/login', credentials);
+      const res = await axios.post('https://dixre-api.onrender.com/login', credentials);
       if (res.data) {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("firstname", res.data.details.firstname)

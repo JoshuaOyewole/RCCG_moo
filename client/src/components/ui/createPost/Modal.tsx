@@ -58,7 +58,7 @@ const Modal = ({ }: IModalProps) => {
                     photos: postURLs 
                 };
 
-                const response = await axios.post(`http://localhost:5000/post/create`, payload, {
+                const response = await axios.post(`https://dixre-api.onrender.com//post/create`, payload, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

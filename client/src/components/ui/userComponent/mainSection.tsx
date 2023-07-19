@@ -19,7 +19,7 @@ const MainSection = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/post/`,
+      const response = await axios.get(`https://dixre-api.onrender.com/post/`,
         {
           params: {
             user_id: `${user_id}`,
