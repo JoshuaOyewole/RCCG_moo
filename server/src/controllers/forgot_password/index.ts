@@ -72,7 +72,7 @@ const resetPWD = async (req: Request, res: Response, next: NextFunction) => {
         });
     }
     catch (err) {
-        return res.status(200).json(err.message)
+        next(createError(400, err.message))
     }
 }
 export { forgetPWD, resetPWD }
