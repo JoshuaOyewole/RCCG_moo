@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react"
+import React, {  useState } from "react";
 import LoginStyle from "./_login.module.scss"
 import InputField from '../../components/form/inputFields/input/Input'
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
@@ -8,6 +8,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+const env =import.meta.env;
 
 type credentialsProps = {
   phone: string,
@@ -25,15 +26,13 @@ const LoginForm = () => {
     password: ""
   })
 
-  //console.log(`${process.env.REACT_APP_API_URL}`);
-
   ///Function to Handle Login Action
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading("loading");
 
     try {
-      const res = await axios.post('https://dixre-api.onrender.com/login', credentials);
+      const res = await axios.post(`${env.VITE_API_URL}/login`, credentials);
       if (res.data) {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("firstname", res.data.details.firstname)

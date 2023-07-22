@@ -5,7 +5,8 @@ import { NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
-import axios from "axios"
+import axios from "axios";
+const env =import.meta.env;
 import { toast } from "react-toastify"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -35,7 +36,7 @@ export default function index() {
         const email = credentials.email.trim();
 
         try {
-            const res = await axios.post('https://dixre-api.onrender.com/forgot_pwd', { email });
+            const res = await axios.post(`${env.VITE_API_URL}/forgot_pwd`, { email });
             if (res.data) {
                 setLoading("success")
 

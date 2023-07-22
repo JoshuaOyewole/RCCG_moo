@@ -1,11 +1,11 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PostStyles from "../../../components/ui/createPost/_createpost.module.scss"
-//import Post from "../post/post"
 import Modal from "../createPost/Modal"
 import { postType } from "../../../util/types"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import dayjs from 'dayjs';
+const env =import.meta.env;
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getUserDatas } from '../../../util/auth';
 
@@ -19,7 +19,7 @@ const MainSection = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get(`https://dixre-api.onrender.com/post/`,
+      const response = await axios.get(`${env.VITE_API_URL}/post/`,
         {
           params: {
             user_id: `${user_id}`,

@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 import { signupCredentialsProps } from "../../util/types"
 import { removeZero } from "../../util/validateInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+const env =import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const initialValue = {
@@ -60,7 +61,7 @@ const SignupForm = () => {
             };
 
             try {
-                const res = await axios.post('https://dixre-api.onrender.com/register', (registerPayload));
+                const res = await axios.post(`${env.VITE_API_URL}/register`, (registerPayload));
                 setLoading("success")
                 toast.success(res.data.message);
 

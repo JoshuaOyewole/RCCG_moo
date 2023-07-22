@@ -9,6 +9,7 @@ import { ResetPwdCredentialsProps } from "../../util/types"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+const env =import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -36,7 +37,7 @@ export default function index() {
         if (!email && !password && !otp) return toast.error("All Fields are Required!")
 
         try {
-            const res = await axios.post('https://dixre-api.onrender.com//reset_pwd', {
+            const res = await axios.post(`${env.VITE_API_URL}/reset_pwd`, {
                 otp, newPassword: password, email
             });
 
