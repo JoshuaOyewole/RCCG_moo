@@ -7,20 +7,25 @@ import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
 
 
 
 export default function index() {
+    const [loading, setLoading] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [credentials, setCredentials] = useState<{ email: string }>({
         email: "",
     })
 
     const navigate = useNavigate();
+
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+ setLoading("loading");
 
         //Validate if a user entered a value
         if ((credentials.email.length <= 0) || (credentials.email == undefined)) toast.error("Kindly enter a Valid Email Address");
@@ -30,8 +35,10 @@ export default function index() {
         const email = credentials.email.trim();
 
         try {
-            const res = await axios.post('https://dixre-api.onrender.com//forgot_pwd', { email });
+            const res = await axios.post('https://dixre-api.onrender.com/forgot_pwd', { email });
             if (res.data) {
+                setLoading("success")
+
                 toast.success(res.data.message);
                 //Redirect user to the page to enter OTP sent
                 setTimeout(() => {
@@ -41,6 +48,7 @@ export default function index() {
             }
 
         } catch (error: any) {
+            setLoading("error");
             toast.error(error.response.data.message);
         }
     }
@@ -89,7 +97,9 @@ export default function index() {
                         onChange={handleChange}
                         required
                     />
-                    <input type="submit" value="Send Reset Code" className={LoginStyles.login__btn} />
+                      <button type="submit" className={LoginStyles.login__btn}>
+                        {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Send Reset Code"}
+                    </button>
                 </form>
             </div>
         </div>

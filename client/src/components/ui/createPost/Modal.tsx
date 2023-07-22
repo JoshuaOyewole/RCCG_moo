@@ -5,7 +5,7 @@ import {
     getDownloadURL
 } from "firebase/storage";
 import { storage } from "../../../config/firebaseConfig";
-import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
+import { faPhotoFilm, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { v4 } from "uuid";
@@ -19,7 +19,8 @@ interface IModalProps {
 }
 
 const Modal = ({ }: IModalProps) => {
-    const { firstname,token, lastname, profilePicture, user_id:creator_id } = getUserDatas();//Fetches User details (name,profile pixs)
+    const [loading, setLoading] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const { firstname, token, lastname, profilePicture, user_id: creator_id } = getUserDatas();//Fetches User details (name,profile pixs)
     const [imageUpload, setImageUpload] = useState<FileList | null>({} as FileList);
     const [postDesc, setPostDesc] = useState<string>('');
 
@@ -36,8 +37,12 @@ const Modal = ({ }: IModalProps) => {
     //Handle Uploading of Post
     const uploadPost = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading("loading");
 
-        if (!imageUpload) return;
+        if (!imageUpload) {
+            setLoading("error");
+            return;
+        }
         let postURLs: string[] = [];
 
         //Check if the image selected is NOT LESS THAN 2 or GREATER THAN 6
@@ -52,13 +57,13 @@ const Modal = ({ }: IModalProps) => {
                     const url = await getDownloadURL(snapshot.ref)
                     postURLs.push(url)
                 }
-                const payload = { 
-                    creator_id, 
-                    post_description: postDesc, 
-                    photos: postURLs 
+                const payload = {
+                    creator_id,
+                    post_description: postDesc,
+                    photos: postURLs
                 };
 
-                const response = await axios.post(`https://dixre-api.onrender.com//post/create`, payload, {
+                const response = await axios.post(`https://dixre-api.onrender.com/post/create`, payload, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -67,14 +72,17 @@ const Modal = ({ }: IModalProps) => {
                 if (response.data) {
                     /* CLEAR INPUT FIELDS and display a Success Message */
                     clearFields();
+                    setLoading("success");
                     toast.success(response.data.message);
                 }
 
             } catch (error) {
+                setLoading("error");
                 toast.error('An Error Occured while Uploading  your Post');
             }
         }
         else {
+            setLoading("error");
             toast.error('Photos must be Greater than 2 and less than 6')
         }
 
@@ -104,7 +112,9 @@ const Modal = ({ }: IModalProps) => {
                     <input type="file" name="photo" id="photo" multiple onChange={onchange} accept="image/png, image/jpeg" className={ModalStyles.modal__addPhotoIcon} />
 
                 </p>
-                <input type="submit" value="Post" className={ModalStyles.modal__submitBtn} />
+                <button type="submit" className={ModalStyles.modal__submitBtn}>
+                    {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Post"}
+                </button>
             </form>
         </div>
     </div>;

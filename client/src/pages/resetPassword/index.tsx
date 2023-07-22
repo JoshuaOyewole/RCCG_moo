@@ -5,25 +5,29 @@ import { Link, NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
-import { ResetPwdCredentialsProps} from "../../util/types"
+import { ResetPwdCredentialsProps } from "../../util/types"
 import { toast } from "react-toastify"
 import axios from "axios"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 
 
 export default function index() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [credentials, setCredentials] = useState<ResetPwdCredentialsProps>({
         password: "",
         email: "",
         otp: ""
     })
- 
+
 
 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading("loading");//Loading State
 
         // destructure credentials
         const { email, password, otp } = credentials;
@@ -37,12 +41,15 @@ export default function index() {
             });
 
             if (res.data) {
+                setLoading("success");
+
                 toast.success(res.data.message);
                 return setTimeout(() => {
                     navigate("/login")
                 }, 5000);
             }
         } catch (error: any) {
+            setLoading("error");
             toast.error(error.response.data);
         }
     }
@@ -107,11 +114,15 @@ export default function index() {
                         onChange={handleChange}
                         required
                     />
-                    <input type="submit" value="Submit" className={LoginStyles.login__btn} />
+                    <button type="submit" className={LoginStyles.login__btn}>
+                        {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Submit"}
+                    </button>
                 </form>
 
                 <span style={{ paddingTop: "2rem" }}>Return to Login Page?
-                    <NavLink to="/login" className={LoginStyles.fpassword}>  &nbsp; Login Now</NavLink>
+                    <NavLink to="/login" className={LoginStyles.fpassword}>
+                        &nbsp; Login Now
+                    </NavLink>
                 </span>
             </div>
         </div>

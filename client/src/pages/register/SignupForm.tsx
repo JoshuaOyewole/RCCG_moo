@@ -7,6 +7,8 @@ import CountryCode from "../../context/countries.json"
 import { toast } from "react-toastify"
 import { signupCredentialsProps } from "../../util/types"
 import { removeZero } from "../../util/validateInput";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const initialValue = {
     fname: "",
@@ -22,6 +24,8 @@ const initialValue = {
 const SignupForm = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState<signupCredentialsProps>(initialValue as signupCredentialsProps);
+    const [loading, setLoading] = useState<"idle" | "loading" | "success" | "error">("idle")
+
     const default_profile_pixs = "https://cdn-icons-png.flaticon.com/512/149/149071.png?w=740&t=st=1689610177~exp=1689610777~hmac=7ffde0a60b32927acefe64c0fabaa6936e30a2c4078d14d7d494cd6a16fa4b0f";
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +46,7 @@ const SignupForm = () => {
     //Function to Handle Signup Action
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading("loading");
 
         if (credentials.password.length >= 6) {
             //Destructure credentials into LoginPayload
@@ -56,17 +61,20 @@ const SignupForm = () => {
 
             try {
                 const res = await axios.post('https://dixre-api.onrender.com/register', (registerPayload));
-
+                setLoading("success")
                 toast.success(res.data.message);
+
                 setTimeout(() => {
                     navigate("/login");//Assuming all things went well
                 }, 2000);
 
             } catch (error: any) {
+                setLoading("error")
                 toast.error(error.response.data.message);
             }
         }
         else {
+            setLoading("error")
             toast.error("Password length must be above 6 characters")
         }
     }
@@ -159,8 +167,9 @@ const SignupForm = () => {
                     Login
                 </NavLink>
             </span>
-
-            <input type="submit" value="Signup" className={LoginStyle.login__btn} />
+            <button type="submit" className={LoginStyle.login__btn}>
+                {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Signup"}
+            </button>
         </form>
     )
 }
