@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState} from "react"
 import LoginStyle from "../login/_login.module.scss"
 import CommonInputStyle from "../../components/form/inputFields/_common-input-styles.module.scss";
 import { NavLink, useNavigate } from "react-router-dom"
@@ -8,7 +8,7 @@ import { toast } from "react-toastify"
 import { signupCredentialsProps } from "../../util/types"
 import { removeZero } from "../../util/validateInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const env =import.meta.env;
+const env = import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const initialValue = {
@@ -168,8 +168,14 @@ const SignupForm = () => {
                     Login
                 </NavLink>
             </span>
-            <button type="submit" className={LoginStyle.login__btn}>
-                {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Signup"}
+            <button
+                type="submit"
+                className={LoginStyle.login__btn}
+                disabled={loading === "loading" ? true : false}
+            >
+                {loading === "loading"
+                    ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
+                    : "Signup"}
             </button>
         </form>
     )

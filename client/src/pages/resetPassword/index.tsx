@@ -1,7 +1,7 @@
 import LoginStyles from "../login/_login.module.scss"
 import resetPwdImg from "../../assets/images/forget-pwd.png"
 import logo from "../../assets/images/logo.png"
-import { Link, NavLink, useNavigate } from "react-router-dom"
+import {  NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
@@ -9,7 +9,7 @@ import { ResetPwdCredentialsProps } from "../../util/types"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-const env =import.meta.env;
+const env = import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 
@@ -115,8 +115,14 @@ export default function index() {
                         onChange={handleChange}
                         required
                     />
-                    <button type="submit" className={LoginStyles.login__btn}>
-                        {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Submit"}
+                    <button
+                        type="submit"
+                        className={LoginStyles.login__btn}
+                        disabled={loading === "loading" ? true : false}
+                    >
+                        {loading === "loading"
+                            ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
+                            : "Submit"}
                     </button>
                 </form>
 

@@ -6,7 +6,7 @@ import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
 import axios from "axios";
-const env =import.meta.env;
+const env = import.meta.env;
 import { toast } from "react-toastify"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -26,7 +26,7 @@ export default function index() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
- setLoading("loading");
+        setLoading("loading");
 
         //Validate if a user entered a value
         if ((credentials.email.length <= 0) || (credentials.email == undefined)) toast.error("Kindly enter a Valid Email Address");
@@ -45,7 +45,7 @@ export default function index() {
                 setTimeout(() => {
                     navigate('/reset-password')
                 }, 5000);
-                
+
             }
 
         } catch (error: any) {
@@ -98,8 +98,14 @@ export default function index() {
                         onChange={handleChange}
                         required
                     />
-                      <button type="submit" className={LoginStyles.login__btn}>
-                        {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Send Reset Code"}
+                    <button
+                        type="submit" 
+                        className={LoginStyles.login__btn}
+                        disabled={loading === "loading" ? true : false}
+                    >
+                        {loading === "loading"
+                            ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
+                            : "Send Reset Code"}
                     </button>
                 </form>
             </div>

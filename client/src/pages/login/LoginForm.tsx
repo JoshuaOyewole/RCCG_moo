@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import LoginStyle from "./_login.module.scss"
 import InputField from '../../components/form/inputFields/input/Input'
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
@@ -8,7 +8,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
-const env =import.meta.env;
+const env = import.meta.env;
 
 type credentialsProps = {
   phone: string,
@@ -97,8 +97,14 @@ const LoginForm = () => {
           Signup Now
         </NavLink>
       </span>
-      <button type="submit" className={LoginStyle.login__btn}>
-        {loading === "loading" ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" /> : "Login"}
+      <button
+        type="submit"
+        className={LoginStyle.login__btn}
+        disabled={loading === "loading" ? true : false}
+      >
+        {loading === "loading"
+          ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
+          : "Login"}
       </button>
     </form>
   )
