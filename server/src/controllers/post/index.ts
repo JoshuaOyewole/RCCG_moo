@@ -49,7 +49,7 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
             }
 
         } catch (err) {
-            next(createError(400, `An Error occured! Try Again`));
+            next(createError(500, `An Error occured! Try Again`));
         }
     }
     else {
@@ -99,7 +99,7 @@ const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
         }
     }
     catch (error) {
-        next(createError(400, `An Error occured! Try Again`));
+        next(createError(500, `An Error occured! Try Again`));
     }
 }
 
