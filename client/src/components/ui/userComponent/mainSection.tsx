@@ -1,93 +1,78 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PostStyles from "../../../components/ui/createPost/_createpost.module.scss"
+import Loading from '../loadingSpinner/loading';
 import Modal from "../createPost/Modal"
 import { postType } from "../../../util/types"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import dayjs from 'dayjs';
-const env =import.meta.env;
+const env = import.meta.env;
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getUserDatas } from '../../../util/auth';
+import Post from '../post/post';
 
 
 const MainSection = () => {
-  const [posts, setPost] = useState<Array<postType>>([]);
-  const [page, setPage] = useState(1);
+  // State to hold your data and trigger infinite scroll
+  const [data, setData] = useState<postType[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   dayjs.extend(relativeTime);
 
-  let { token, user_id } = getUserDatas()
+  // Function to simulate loading more data (replace with your API call)
+  const fetchMoreData = async () => {
+    let { token, user_id } = getUserDatas()
 
-  const fetchPost = async () => {
     try {
-      const response = await axios.get(`${env.VITE_API_URL}/post/`,
-        {
-          params: {
-            user_id: `${user_id}`,
-            page,
-            limit: 10
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-        });
+      const response = await axios.get(`${env.VITE_API_URL}/post?user_id=${user_id}&page=${currentPage}&limit=10`,
+        { headers: { Authorization: `Bearer ${token}` }, });
 
-      setPost((prev: postType[]) => {
-        return [...prev, ...response.data.data];
-      });
+      const newData: postType[] = response.data.posts; // Assuming the API response contains an array of items
+
+      // If newData is empty, there are no more items to load
+      if (newData.length === 0) {
+        setHasMore(false);
+      } else {
+        console.log(newData);
+
+        setData((prevData) => [...prevData, ...newData]);
+        setCurrentPage((prevPage) => prevPage + 1);
+      }
     } catch (error) {
-      throw error
+      console.error('Error fetching data:', error);
+      setHasMore(false); // Disable infinite scroll on error
     }
-  }
+  };
 
   useEffect(() => {
-    fetchPost();
-  }, [page])
+    // Fetch initial data when the component mounts
+    fetchMoreData();
+  }, []);
+
 
   return (
     <>
       <Modal />
       <div className={PostStyles.post__posts_container}>
         <InfiniteScroll
-          dataLength={posts.length}
-          next={() => setPage(prev => prev + 1)}
-          hasMore={true} // Set to false when there's no more data to load
-          loader={<h4>Loading...</h4>} // Custom loading component
-          endMessage={<p>No more items to load</p>} // Message when there's no more data
+          dataLength={data.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={<Loading />}
+          endMessage={<p>No more items to load.</p>}
         >
-          {
-            posts.map((post, index) => {
 
-              return <div className={PostStyles.post__post} key={index}>
-                {/* Header */}
-                <div className={PostStyles.post__post_header}>
-                  <img src={post.creator.profilePicture == undefined ? " " : post.creator.profilePicture} className={PostStyles.post__user_pixs} alt={post.creator.name} />
-                  <div className={PostStyles.post__post_info}>
-                    <p className={PostStyles.post__user_name}>{post.creator.name}</p>
-                    <p>{dayjs(post?.time_posted).fromNow()}</p>
-                  </div>
-                </div>
-                {/* Description */}
-                <span>
-                  <p id={post?._id}>
-                    {post?.post_description}
-                  </p>
-                  <p className={PostStyles.post__seeMoreBtn}>See more</p>
-                </span>
-
-                {/* Photos */}
-                <div className={PostStyles.post__post_photos}>
-                  {
-                    post.photos.map((photo, index) => {
-                      return <div className={PostStyles.post__post_photoContainer} key={index}>
-                        <img src={photo} alt={`${post.creator.name} photo`} />
-                      </div>
-                    })
-                  }
-
-                </div>
-              </div>
-            })
-          }
+          {data.map((item, index) => (
+            <Post
+              postID={item._id}
+              username={item.creator.name}
+              userImg={item.creator.profilePicture}
+              timeposted={item.time_posted}
+              post_desc={item.post_description}
+              photos={item.photos}
+              key={index}
+            />
+          ))}
         </InfiniteScroll>
       </div>
 
