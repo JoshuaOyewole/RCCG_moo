@@ -62,23 +62,29 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
 
 //GetAllPost Controller
 const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
+    const { user_id } = req.query;
+    const page: number = parseInt(req.query.page as string) || 1;//Current page requesting data for
+    const limit: number = parseInt(req.query.limit as string) || 10;//(limit) Define the number of items per page
 
     try {
-        const user_id = req.query.user_id;
+        // Calculate the skip value to determine the starting index of the pagination
+        const skip = (page - 1) * limit;
 
         if (user_id !== undefined || "") {
-
-            const posts = await Post.find();
+            // Fetch the post with pagination
+            const posts = await Post.find().skip(skip).limit(limit).exec();
 
             //Check if there is a post in the DB
             if (posts.length >= 1) {
                 const filteredPost = posts.filter(post => post.creator.id !== user_id);//filter out current user post
-                res.status(200).json({
-                    data: filteredPost
-                });
+                // Fetch the total count of Posts (for calculating total pages)
+                const totalPostCount = await Post.countDocuments().exec();
+                // Calculate the total number of pages based on the total count and items per page
+                const totalPages:number = Math.ceil(totalPostCount / limit);
+                res.status(200).json({ filteredPost, totalPages });
             }
             else {
-                res.status(200).json({
+                res.status(201).json({
                     success: true,
                     message: ` No Post Available `,
                 });
