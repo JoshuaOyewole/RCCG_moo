@@ -24,7 +24,7 @@
 }
 
 .primary_btn {
-    background:  variable.$Dixre-Main;
+    background:  variable.$primary;
     color:  variable.$White;
     width: 45%;
     height: auto;
@@ -44,8 +44,8 @@
         color:  variable.$Error-Main;
     }
     &--primary{
-        border: 1px solid variable.$Dixre-Main;
-    color:  variable.$Dixre-Main;
+        border: 1px solid variable.$primary;
+    color:  variable.$primary;
     }
 }
 

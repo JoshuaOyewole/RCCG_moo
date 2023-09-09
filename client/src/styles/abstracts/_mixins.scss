@@ -35,7 +35,7 @@
     }
 
     @if($breakpoint == 'sm-phone'){
-      @media (max-width:23.43em) {@content};//375px
+      @media (max-width:23.45em) {@content};//375px
     }
     @if($breakpoint == 'xs-phone'){
       @media (max-width:20em) {@content};//320px

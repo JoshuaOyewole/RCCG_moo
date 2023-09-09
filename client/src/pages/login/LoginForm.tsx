@@ -33,6 +33,8 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post(`${env.VITE_API_URL}/login`, credentials);
+      console.log(res);
+      
       if (res.data) {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("firstname", res.data.details.firstname)
@@ -61,7 +63,7 @@ const LoginForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLButtonElement>) => {
     setCredentials(
       (prev) => ({
-        ...prev,
+        ...prev,// 
         [e.target.name]: e.target.value
       }
       )

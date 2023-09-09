@@ -161,11 +161,11 @@
         }
 
         &:first-child {
-            border-bottom: 2px solid variable.$Dixre-Main;
+            border-bottom: 2px solid variable.$primary;
         }
 
         &:active {
-            color: variable.$Dixre-Main;
+            color: variable.$primary;
         }
     }
 }

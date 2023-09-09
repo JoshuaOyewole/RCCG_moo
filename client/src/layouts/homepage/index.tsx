@@ -1,11 +1,10 @@
 import DashboardStyles from "./_userDashboardLayout.module.scss"
-import logo from "../../assets/images/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./sidebar";
-import { NavLink } from "react-router-dom";
 import { getUserDatas } from "../../util/auth";
+import { InAppHeader } from "../../components/header/Header";
 
 
 
@@ -22,15 +21,7 @@ function HomepageLayout(props: HomepageProps) {
         <div className={DashboardStyles.dashboard__container}>
             {/* HEADER SECTION (TOP NAVBAR) */}
             <header className={DashboardStyles.dashboard__header}>
-                <div className={DashboardStyles.dashboard__logoContainer}>
-                    <NavLink to="/" className="logoCobt">
-                        <img
-                            src={logo}
-                            alt="Dixre Logo"
-                            className={DashboardStyles.dashboard__logo}
-                        />
-                    </NavLink>
-                </div>
+                <InAppHeader extraClass={'px-0'} />
 
                 <div className={DashboardStyles.dashboard__headerNavWrapper}>
                     <button className={DashboardStyles.userProfile__icon}>

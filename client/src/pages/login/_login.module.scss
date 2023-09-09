@@ -4,7 +4,7 @@
 .login {
   &__container {
     background: variable.$White;
-    height: 100vh;
+    height: 80vh;
     @include mixin.flex($align: center, $justify: center);
 
     @include mixin.media("XLdesktop") {
@@ -36,7 +36,7 @@
 
     @include mixin.media("tab") {
       width: 100%;
-      padding: 3rem 10rem;
+      padding: 3rem 6rem;
     }
     @include mixin.media("phone") {
       padding: 3rem 2rem;
@@ -67,8 +67,11 @@
     padding: 5rem 10rem;
     width: 50%;
     position: relative;
+  
+
     @include mixin.media("tab") {
       width: 100%;
+      display: none;
     }
   }
 
@@ -80,7 +83,11 @@
     line-height: 5.5rem;
     letter-spacing: -0.04em;
 
-    color: variable.$tertiary;
+    color: variable.$grey;
+
+    @include mixin.media("sm-phone") {
+      font-size: 3.5rem;
+    }
   }
 
   &__instruction {
@@ -107,7 +114,7 @@
   }
 
   &__btn {
-    background-color: variable.$Dixre-Main;
+    background-color: variable.$primary;
     color: variable.$White;
   }
 
@@ -145,10 +152,11 @@
 .fpassword {
   display: inline-block;
   text-transform: uppercase;
-  color: variable.$Dixre-Main;
+  color: variable.$secondary;
   font-weight: 600;
   margin-bottom: 3rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  padding-left: 1rem;
 }
 
 .login__btn {
@@ -156,7 +164,7 @@
   height: 4.8rem;
   padding: 1rem 2rem;
   border-radius: 6px;
-  background-color: variable.$Dixre-Main !important;
+  background-color: variable.$primary !important;
   border: 0 !important;
   outline: 0 !important;
   color: variable.$White !important;
@@ -167,7 +175,7 @@
 
   &:hover {
     background-color: darken(
-      $color: variable.$Dixre-Main,
+      $color: variable.$primary,
       $amount: 10%
     ) !important;
   }

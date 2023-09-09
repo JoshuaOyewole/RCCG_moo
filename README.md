@@ -1,4 +1,4 @@
-# Dixre Multi-user App Documentation
+# Mount of Olive Web App Documentation
 
 This documentation provides instructions on setting up and running the
 dixre application that includes signup, login, password reset

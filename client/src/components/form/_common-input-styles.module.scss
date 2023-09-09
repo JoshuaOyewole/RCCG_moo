@@ -16,7 +16,7 @@
   @include mixin.flex($align: center);
 
   &:focus-within {
-    border-color: variable.$Dixre-Main;
+    border-color: variable.$primary;
   }
 
   input {

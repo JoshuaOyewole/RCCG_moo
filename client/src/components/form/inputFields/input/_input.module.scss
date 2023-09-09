@@ -39,7 +39,7 @@
         }
 
         &:focus {
-            outline: 1.4px solid variable.$Dixre-Main  !important;
+            outline: 1.4px solid variable.$primary  !important;
             color: variable.$secondary;
         }
     }
@@ -75,6 +75,6 @@
 
 .buttonIcon{
     background-color: transparent;
-    color: variable.$Dixre-Main;
+    color: variable.$secondary;
     font-size: 1.2rem;
 }

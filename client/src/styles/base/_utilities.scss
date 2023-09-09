@@ -14,7 +14,10 @@
 .w-50 {
   width: 50% !important;
 }
-
+.px-0{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 .tertiary-color {
   color: variable.$tertiary;
 }

@@ -19,14 +19,13 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       password: hash,
     };
 
-    const response = await User.create(newUser);
+    await User.create(newUser);
     res.status(200).json({
       success: true,
       message: ` Registration successful!`
     });
   } catch (err) {
-    if (err.keyValue?.phone) {return next(createError(401, `Phone already Exist!`));}
-    console.log(err);
+    if (err.keyValue?.phone) {return next(createError(401, `Phone No. already Exist!`));}
     next(createError(400, `An Error occured! Try Again`));
   }
 };
@@ -87,7 +86,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     });
   } catch (err) {
     console.log(err);
-
     next(createError(400, err.message));
   }
 };

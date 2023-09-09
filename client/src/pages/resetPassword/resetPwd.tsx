@@ -1,5 +1,5 @@
 import LoginStyles from "../login/_login.module.scss"
-import resetPwdImg from "../../assets/images/forget-pwd.png"
+import resetPwdImg from "../../assets/images/forget_pwd.svg"
 import logo from "../../assets/images/logo.png"
 import { NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
@@ -10,6 +10,7 @@ const env = import.meta.env;
 import { toast } from "react-toastify"
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Header } from "../../components/header/Header"
 
 
 
@@ -66,49 +67,54 @@ export default function index() {
 
 
     return (
-        <div className={LoginStyles.login__container}>
 
-            {/* LOGIN IMAGE AT THE LEFT */}
-            <div className={LoginStyles.login__left}>
-                <NavLink to="/" className="logoCont">
-                    <img src={logo} className={LoginStyles.logo} alt='Dixre Logo' />
-                </NavLink>
+        <>
+            <Header />
+            <div className={LoginStyles.login__container}>
+
+                {/* LOGIN IMAGE AT THE LEFT */}
+                <div className={LoginStyles.login__left}>
+                    <NavLink to="/" className="logoCont">
+                        <img src={logo} className={LoginStyles.logo} alt='Dixre Logo' />
+                    </NavLink>
 
 
-                <div className={LoginStyles.login__ImageContainer}>
-                    <img
-                        src={resetPwdImg}
-                        alt="Welcome to Dixre. Kindly login below with your login details"
-                        className={LoginStyles.login__image}
-                    />
+                    <div className={LoginStyles.login__ImageContainer}>
+                        <img
+                            src={resetPwdImg}
+                            alt="Welcome to Dixre. Kindly login below with your login details"
+                            className={LoginStyles.login__image}
+                        />
+                    </div>
+                </div>
+
+                {/* LOGIN FORM SECTION */}
+                <div className={LoginStyles.login__FormContainer} >
+                    <h2 className={LoginStyles.login__title}>Reset Your Password</h2>
+                    <h2 className={LoginStyles.login__instruction}>Kindly enter your Email Address to reset your password</h2>
+                    <form className={LoginStyles.loginForm} onSubmit={handleSubmit}>
+                        <InputField
+                            type='email'
+                            name="email"
+                            placeholder="Email Address"
+                            iconClassName={CommonInputStyles.iconRight}
+                            value={credentials.email}
+                            onChange={handleChange}
+                            required
+                        />
+                        <button
+                            type="submit"
+                            className={LoginStyles.login__btn}
+                            disabled={loading === "loading" ? true : false}
+                        >
+                            {loading === "loading"
+                                ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
+                                : "Send Reset Code"}
+                        </button>
+                    </form>
                 </div>
             </div>
+        </>
 
-            {/* LOGIN FORM SECTION */}
-            <div className={LoginStyles.login__FormContainer} >
-                <h2 className={LoginStyles.login__title}>Reset Your Password</h2>
-                <h2 className={LoginStyles.login__instruction}>Kindly enter your Email Address to reset your password</h2>
-                <form className={LoginStyles.loginForm} onSubmit={handleSubmit}>
-                    <InputField
-                        type='email'
-                        name="email"
-                        placeholder="Email Address"
-                        iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <button
-                        type="submit" 
-                        className={LoginStyles.login__btn}
-                        disabled={loading === "loading" ? true : false}
-                    >
-                        {loading === "loading"
-                            ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
-                            : "Send Reset Code"}
-                    </button>
-                </form>
-            </div>
-        </div>
     )
 }

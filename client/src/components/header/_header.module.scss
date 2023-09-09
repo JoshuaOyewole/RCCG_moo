@@ -1,0 +1,37 @@
+@use "../../styles/abstracts/variables" as variable;
+@use "../../styles/abstracts/mixins" as mixin;
+
+.header {
+  @include mixin.flex($align: center);
+  padding: 1rem 5rem;
+  height: 10vh;
+  &_wrapper {
+    @include mixin.flex($align: center, $justify: center);
+  }
+
+  &_para {
+    display: flex;
+    flex-direction: column;
+    line-height: 2rem;
+    font-weight: 800;
+    padding-left: 1rem;
+  }
+
+  &_para2 {
+    @include mixin.media("phone") {
+      display: none;
+    }
+  }
+
+  @include mixin.media("tab") {
+    padding: 1rem 2rem;
+  }
+  @include mixin.media("phone") {
+    padding: 1rem;
+  }
+
+  &_image {
+    width: 5rem;
+    height: 5rem;
+  }
+}

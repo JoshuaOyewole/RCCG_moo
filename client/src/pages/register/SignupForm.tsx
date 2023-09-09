@@ -1,12 +1,10 @@
-import React, { useState} from "react"
+import React, { useState } from "react"
 import LoginStyle from "../login/_login.module.scss"
 import CommonInputStyle from "../../components/form/inputFields/_common-input-styles.module.scss";
 import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios";
-import CountryCode from "../../context/countries.json"
 import { toast } from "react-toastify"
 import { signupCredentialsProps } from "../../util/types"
-import { removeZero } from "../../util/validateInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const env = import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -17,18 +15,25 @@ const initialValue = {
     phone: "",
     password: "",
     email: "",
+    dob: "",
+    department: "",
     profilePicture: "",
     gender: '',
-    countryCode: '234',
 }
 
 const SignupForm = () => {
+
     const navigate = useNavigate();
+    const [dobType, setDOBType] = useState<boolean>(true)
     const [credentials, setCredentials] = useState<signupCredentialsProps>(initialValue as signupCredentialsProps);
     const [loading, setLoading] = useState<"idle" | "loading" | "success" | "error">("idle")
 
     const default_profile_pixs = "https://cdn-icons-png.flaticon.com/512/149/149071.png?w=740&t=st=1689610177~exp=1689610777~hmac=7ffde0a60b32927acefe64c0fabaa6936e30a2c4078d14d7d494cd6a16fa4b0f";
 
+
+    const handleDOBField = () => setDOBType(false);//Handle DOB Input Field
+
+    //Handle Input Change
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCredentials(
             (prev) => ({
@@ -38,7 +43,7 @@ const SignupForm = () => {
             )
         );
     }
-
+    //Handle Select Fields
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setCredentials((prevCredentials) => (
             { ...prevCredentials, [event.target.name]: event.target.value }
@@ -55,11 +60,14 @@ const SignupForm = () => {
                 gender: credentials.gender.toLowerCase(),
                 firstname: credentials.fname,
                 lastname: credentials.lname,
-                phone: `${credentials.countryCode}${removeZero(credentials.phone)}`,
+                dob: credentials.dob,
+                phone: credentials.phone,
+                department: credentials.department,
                 password: credentials.password,
-                email: credentials.email, profilePicture: credentials.profilePicture !== "" ? credentials.profilePicture : default_profile_pixs
+                email: credentials.email,
+                profilePicture: credentials.profilePicture !== "" ? credentials.profilePicture : default_profile_pixs
             };
-
+//`234${credentials.phone}.slice()`,
             try {
                 const res = await axios.post(`${env.VITE_API_URL}/register`, (registerPayload));
                 setLoading("success")
@@ -71,7 +79,15 @@ const SignupForm = () => {
 
             } catch (error: any) {
                 setLoading("error")
-                toast.error(error.response.data.message);
+                if (error.message == "Network Error") {
+                    toast.error(error.message);
+                }
+                else {
+                    toast.error(error?.response?.data?.message);
+                }
+
+
+
             }
         }
         else {
@@ -81,7 +97,7 @@ const SignupForm = () => {
     }
 
     return (
-        <form className={LoginStyle.SignupForm__form} onSubmit={handleSubmit}>
+        <form className={LoginStyle.SignupForm__form} autoComplete="false" onSubmit={handleSubmit}>
             <div className={LoginStyle.SignupForm__wrapper}>
                 <div className={CommonInputStyle.input_field_container}>
                     <input
@@ -107,18 +123,10 @@ const SignupForm = () => {
 
             </div>
             <div className={LoginStyle.SignupForm__wrapper}>
-                <div className={CommonInputStyle.input_field_container} >
-                    <div style={{ display: "flex" }}>
-                        <select name="countryCode" className={CommonInputStyle.country_code} required onChange={handleSelect}>
-                            <option value="234">NGA (234)</option>
-                            {
-                                CountryCode.map((country, index) => {
-                                    return <option value={country.phone_code} key={index}>{country.three_letter_country_code} ({country.phone_code})</option>
-                                })
-                            }
-                        </select>
+                <div className={`${CommonInputStyle.input_field_container} ${LoginStyle.SignupForm__col5}`} >
+                    <div>
                         <input
-                            type="tel"
+                            type="number"
                             name="phone"
                             id="phone"
                             placeholder="Phone Number"
@@ -143,6 +151,7 @@ const SignupForm = () => {
                         type='password'
                         name="password"
                         placeholder="Password"
+                        autoComplete="false"
                         /*  icon={Icon}
                          iconClassName={CommonInputStyles.iconRight} */
                         value={credentials.password}
@@ -159,6 +168,30 @@ const SignupForm = () => {
                         onChange={handleChange}
                         required
                     />
+                </div>
+            </div>
+            <div className={LoginStyle.SignupForm__wrapper}>
+                <div className={CommonInputStyle.input_field_container} >
+                    <input
+                        type={dobType ? "text" : "date"}
+                        name="dob"
+                        onFocus={handleDOBField}
+                        placeholder="Birth Day & Month"
+                        /*  icon={Icon}
+                         iconClassName={CommonInputStyles.iconRight} */
+                        value={credentials.dob}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className={CommonInputStyle.input_field_container} >
+                    <select placeholder="Are you a Worker" name="department" required className={`${LoginStyle.SignupForm__col5} ${LoginStyle.SignupForm__select}`} onChange={handleSelect}>
+
+                        <option value="null">Select Department</option>
+                        <option value="none">Not a Worker</option>
+                        <option value="choir">Choir</option>
+                        <option value="media">Media</option>
+                    </select>
                 </div>
             </div>
 

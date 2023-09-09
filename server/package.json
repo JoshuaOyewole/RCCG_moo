@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "moo_server",
   "version": "1.0.0",
-  "description": "API for Dixre Assessment",
+  "description": "Mount of Olive Server",
   "main": "./src/index.ts ",
   "scripts": {
     "start": "tsc && node dist/index.js",
@@ -33,6 +33,7 @@
     "mongodb": "^4.8.1",
     "mongoose": "^7.3.2",
     "node": "^20.4.0",
+    "node-cron": "^3.0.2",
     "nodemailer": "^6.9.3"
   }
 }

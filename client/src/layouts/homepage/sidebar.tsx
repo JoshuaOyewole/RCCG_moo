@@ -1,7 +1,7 @@
 import DashboardStyles from "./_userDashboardLayout.module.scss"
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus, faHouseUser, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus, faGift, faHouseUser, faMagnifyingGlass, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 
 
 const Sidebar = () => {
@@ -25,8 +25,19 @@ const Sidebar = () => {
                 </li>
 
                 <li className={DashboardStyles.sidebar__navItem}>
-                    <NavLink className={DashboardStyles.sidebar__navLink} to="#refreshPost">
-                        <FontAwesomeIcon icon={faCirclePlus} /> <span>Refresh Post</span>
+                    <NavLink className={DashboardStyles.sidebar__navLink} to="#media">
+                        <FontAwesomeIcon icon={faCirclePlus} /> <span>Media Resources</span>
+                    </NavLink>
+                </li>
+                <li className={DashboardStyles.sidebar__navItem}>
+                    <NavLink className={DashboardStyles.sidebar__navLink} to="#giving"> 
+                        <FontAwesomeIcon icon={faGift} />
+                        <span>Online Giving</span>
+                    </NavLink>
+                </li>
+                <li className={DashboardStyles.sidebar__navItem}>
+                    <NavLink className={DashboardStyles.sidebar__navLink} to="#giving">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} /><span>Quick Links</span>
                     </NavLink>
                 </li>
                 <li className={DashboardStyles.sidebar__navItem}>

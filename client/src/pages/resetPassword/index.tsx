@@ -1,7 +1,7 @@
 import LoginStyles from "../login/_login.module.scss"
-import resetPwdImg from "../../assets/images/forget-pwd.png"
+import resetPwdImg from "../../assets/images/reset_pwd.svg"
 import logo from "../../assets/images/logo.png"
-import {  NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import InputField from "../../components/form/inputFields/input/Input"
 import { useState } from "react"
 import CommonInputStyles from "../../components/form/inputFields/_common-input-styles.module.scss"
@@ -11,6 +11,7 @@ import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const env = import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+import { Header } from "../../components/header/Header"
 
 
 
@@ -65,73 +66,78 @@ export default function index() {
         )
     }
     return (
-        <div className={LoginStyles.login__container}>
 
-            {/* LOGIN IMAGE AT THE LEFT */}
-            <div className={LoginStyles.login__left}>
-                <NavLink to="/" className="logoCont">
-                    <img src={logo} className={LoginStyles.logo} alt='Dixre Logo' />
-                </NavLink>
+        <>
+            <Header />
+            <div className={LoginStyles.login__container}>
+
+                {/* LOGIN IMAGE AT THE LEFT */}
+                <div className={LoginStyles.login__left}>
+                    <NavLink to="/" className="logoCont">
+                        <img src={logo} className={LoginStyles.logo} alt='Dixre Logo' />
+                    </NavLink>
 
 
-                <div className={LoginStyles.login__ImageContainer}>
-                    <img
-                        src={resetPwdImg}
-                        alt="Welcome to Dixre. Kindly login below with your login details"
-                        className={LoginStyles.login__image}
-                    />
+                    <div className={LoginStyles.login__ImageContainer}>
+                        <img
+                            src={resetPwdImg}
+                            alt="Welcome to Dixre. Kindly login below with your login details"
+                            className={LoginStyles.login__image}
+                        />
+                    </div>
+                </div>
+
+                {/* LOGIN FORM SECTION */}
+                <div className={LoginStyles.login__FormContainer} >
+                    <h2 className={LoginStyles.login__title}>Reset Your Password</h2>
+                    <h2 className={LoginStyles.login__instruction}>Kindly input the 4 digit OTP sent to your Email inorder to reset your Password</h2>
+                    <form className={LoginStyles.loginForm} onSubmit={handleSubmit}>
+                        <InputField
+                            type='text'
+                            name="otp"
+                            placeholder="Enter OTP Code"
+                            iconClassName={CommonInputStyles.iconRight}
+                            value={credentials.otp}
+                            onChange={handleChange}
+                            required
+                        />
+                        <InputField
+                            type='password'
+                            name="password"
+                            placeholder="New Password"
+                            iconClassName={CommonInputStyles.iconRight}
+                            value={credentials.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <InputField
+                            type='email'
+                            name="email"
+                            placeholder="Email address"
+                            iconClassName={CommonInputStyles.iconRight}
+                            value={credentials.email}
+                            onChange={handleChange}
+                            required
+                        />
+                        <button
+                            type="submit"
+                            className={LoginStyles.login__btn}
+                            disabled={loading === "loading" ? true : false}
+                        >
+                            {loading === "loading"
+                                ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
+                                : "Submit"}
+                        </button>
+                    </form>
+
+                    <span style={{ paddingTop: "2rem" }}>Return to Login Page?
+                        <NavLink to="/login" className={LoginStyles.fpassword}>
+                            &nbsp; Login Now
+                        </NavLink>
+                    </span>
                 </div>
             </div>
+        </>
 
-            {/* LOGIN FORM SECTION */}
-            <div className={LoginStyles.login__FormContainer} >
-                <h2 className={LoginStyles.login__title}>Reset Your Password</h2>
-                <h2 className={LoginStyles.login__instruction}>Kindly input the 4 digit OTP sent to your Email inorder to reset your Password</h2>
-                <form className={LoginStyles.loginForm} onSubmit={handleSubmit}>
-                    <InputField
-                        type='text'
-                        name="otp"
-                        placeholder="Enter OTP Code"
-                        iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.otp}
-                        onChange={handleChange}
-                        required
-                    />
-                    <InputField
-                        type='password'
-                        name="password"
-                        placeholder="New Password"
-                        iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.password}
-                        onChange={handleChange}
-                        required
-                    />
-                    <InputField
-                        type='email'
-                        name="email"
-                        placeholder="Email address"
-                        iconClassName={CommonInputStyles.iconRight}
-                        value={credentials.email}
-                        onChange={handleChange}
-                        required
-                    />
-                    <button
-                        type="submit"
-                        className={LoginStyles.login__btn}
-                        disabled={loading === "loading" ? true : false}
-                    >
-                        {loading === "loading"
-                            ? <FontAwesomeIcon icon={faSpinner} spin style={{ color: "#ffffff", }} size="2xl" />
-                            : "Submit"}
-                    </button>
-                </form>
-
-                <span style={{ paddingTop: "2rem" }}>Return to Login Page?
-                    <NavLink to="/login" className={LoginStyles.fpassword}>
-                        &nbsp; Login Now
-                    </NavLink>
-                </span>
-            </div>
-        </div>
     )
 }

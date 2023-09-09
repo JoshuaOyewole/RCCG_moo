@@ -20,7 +20,8 @@ export type signupCredentialsProps = {
   lname: string,
   phone: string,
   gender: string,
-  countryCode: string,
+  dob?: string | number | readonly string[] | undefined,
+  department?:string,
   password: string,
   email: string,
   profilePicture?: string
