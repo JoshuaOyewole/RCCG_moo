@@ -85,7 +85,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       token: token,
     });
   } catch (err) {
-    console.log(err);
     next(createError(400, err.message));
   }
 };
