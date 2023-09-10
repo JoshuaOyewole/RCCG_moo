@@ -39,7 +39,7 @@ app.use("/reset_pwd", resetPWD);
 
 
 // Set up your cron job
-cron.schedule('*/9 * * * * *', async () => {
+cron.schedule('* */5 * * * *', async () => {
     // Reminder logic here
     try {
         //Fetch the list of all registered members in the DB
