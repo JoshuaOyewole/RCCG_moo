@@ -18,8 +18,8 @@ import userRoute from "./routes/users/index";
 import OTPRoute from "./routes/OTP/index";
 import forgetPWD from "./routes/reset_pwd/forgot_pwd";
 import resetPWD from "./routes/reset_pwd/reset_pwd";
-import User from "./models/user";
-import sendEmail from "util/sendEmail";
+//import User from "./models/user";
+//const sendEmail = require("./util/sendEmail");
 
 //DB INITIALIZATION
 dbConnect();
@@ -40,34 +40,7 @@ app.use("/reset_pwd", resetPWD);
 
 
 // Set up your cron job
-cron.schedule('*/10 * * * *', async () => {
 
-    //0 07 * * 1/
-    // Reminder logic here
-    try {
-        //Fetch the list of all registered members in the DB
-        const registeredUser =await User.find({});
-
-        const details = {
-            from:"joshuaoyewole20@hotmail.com",
-            to:"joshuaOyewole20@gmail.com",
-            email:"joshuaOyewole20@gmail.com",
-            subject:"Good morning reminder from us",
-            message:"Hope you are fine",
-            duration:1
-        }
-        sendEmail(details);
-
-
-
-        //Filter out those whose birthday is today(Month & Day is TODAY)
-        //Send a message (pass the name of the user)
-
-    } catch (error) {
-        throw error
-    }
-
-});
 
 //ERROR HANDLING MIDDLEWARE
 app.use(error);
