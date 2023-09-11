@@ -8,6 +8,8 @@ import { signupCredentialsProps } from "../../util/types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const env = import.meta.env;
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import InputField from "../../components/form/inputFields/input/Input";
+import usePasswordToggle from "../../hooks/usePasswordToggle";
 
 const initialValue = {
     fname: "",
@@ -16,15 +18,17 @@ const initialValue = {
     password: "",
     email: "",
     dob: "",
+    anniversary: "",
     department: "",
     profilePicture: "",
     gender: '',
 }
 
 const SignupForm = () => {
-
+    const [InputType, Icon] = usePasswordToggle();
     const navigate = useNavigate();
-    const [dobType, setDOBType] = useState<boolean>(true)
+    const [dobType, setDOBType] = useState<boolean>(true);
+    const [isMarried, setIsMarried] = useState<boolean>(false)
     const [credentials, setCredentials] = useState<signupCredentialsProps>(initialValue as signupCredentialsProps);
     const [loading, setLoading] = useState<"idle" | "loading" | "success" | "error">("idle")
 
@@ -67,7 +71,7 @@ const SignupForm = () => {
                 email: credentials.email,
                 profilePicture: credentials.profilePicture !== "" ? credentials.profilePicture : default_profile_pixs
             };
-//`234${credentials.phone}.slice()`,
+            //`234${credentials.phone}.slice()`,
             try {
                 const res = await axios.post(`${env.VITE_API_URL}/register`, (registerPayload));
                 setLoading("success")
@@ -146,29 +150,34 @@ const SignupForm = () => {
                 </select>
             </div>
             <div className={LoginStyle.SignupForm__wrapper}>
-                <div className={CommonInputStyle.input_field_container} >
-                    <input
-                        type='password'
-                        name="password"
-                        placeholder="Password"
-                        autoComplete="false"
-                        /*  icon={Icon}
-                         iconClassName={CommonInputStyles.iconRight} */
-                        value={credentials.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className={CommonInputStyle.input_field_container} >
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={credentials.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+
+                <select placeholder="Are you a Worker" name="isMarried" required className={` ${LoginStyle.SignupForm__select}`} onChange={handleSelect}>
+
+                    <option value="">Marital Status</option>
+                    <option value="yes">Married</option>
+                    <option value="no">Single</option>
+                </select>
+                <InputField
+                    type={dobType ? "text" : "date"}
+                    name="anniversary"
+                    placeholder="Enter your Wedding Anniversary"
+                    inputContainerClassName={CommonInputStyle.input_field_container_col12}
+                    onFocus={handleDOBField}
+                    value={credentials.anniversary}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
+            <div className={CommonInputStyle.input_field_container} >
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={credentials.email}
+                    onChange={handleChange}
+                    required
+                />
             </div>
             <div className={LoginStyle.SignupForm__wrapper}>
                 <div className={CommonInputStyle.input_field_container} >
@@ -177,14 +186,12 @@ const SignupForm = () => {
                         name="dob"
                         onFocus={handleDOBField}
                         placeholder="Birth Day & Month"
-                        /*  icon={Icon}
-                         iconClassName={CommonInputStyles.iconRight} */
                         value={credentials.dob}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <div className={CommonInputStyle.input_field_container} >
+                <div className={`${CommonInputStyle.input_field_container}`} >
                     <select placeholder="Are you a Worker" name="department" required className={`${LoginStyle.SignupForm__col5} ${LoginStyle.SignupForm__select}`} onChange={handleSelect}>
 
                         <option value="null">Select Department</option>
@@ -192,6 +199,20 @@ const SignupForm = () => {
                         <option value="choir">Choir</option>
                         <option value="media">Media</option>
                     </select>
+                </div>
+            </div>
+            <div className={LoginStyle.SignupForm__wrapper}>
+                <div className={`${CommonInputStyle.input_field_container_col12} ${CommonInputStyle.input_field_container}`} >
+                    <input
+                        type="number"
+                        name="phone"
+                        id="phone"
+                        placeholder="Phone Number"
+                        value={credentials.phone}
+                        onChange={handleChange}
+                        required
+                    />
+
                 </div>
             </div>
 

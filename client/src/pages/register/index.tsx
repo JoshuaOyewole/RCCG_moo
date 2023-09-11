@@ -15,9 +15,6 @@ export default function index() {
 
         {/* REGISTER IMAGE AT THE LEFT */}
         <div className={LoginStyles.login__left}>
-          <NavLink to="/" className="logoCont">
-            <img src={logo} className={LoginStyles.logo} alt='RCCG MOO Logo' />
-          </NavLink>
 
 
           <div className={LoginStyles.login__ImageContainer}>

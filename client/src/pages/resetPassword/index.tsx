@@ -73,9 +73,7 @@ export default function index() {
 
                 {/* LOGIN IMAGE AT THE LEFT */}
                 <div className={LoginStyles.login__left}>
-                    <NavLink to="/" className="logoCont">
-                        <img src={logo} className={LoginStyles.logo} alt='Dixre Logo' />
-                    </NavLink>
+                  
 
 
                     <div className={LoginStyles.login__ImageContainer}>

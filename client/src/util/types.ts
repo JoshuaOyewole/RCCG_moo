@@ -20,6 +20,7 @@ export type signupCredentialsProps = {
   lname: string,
   phone: string,
   gender: string,
+  anniversary: string | number | readonly string[] | undefined,
   dob?: string | number | readonly string[] | undefined,
   department?:string,
   password: string,
