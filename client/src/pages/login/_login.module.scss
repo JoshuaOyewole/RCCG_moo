@@ -68,7 +68,6 @@
     padding: 5rem 10rem;
     width: 50%;
     position: relative;
-  
 
     @include mixin.media("tab") {
       width: 100%;
@@ -186,6 +185,9 @@
   &__form {
     width: 97%;
     margin-top: 4rem;
+    @include mixin.media("phone") {
+      width: 100%;
+    }
   }
   &__wrapper {
     @include mixin.flex($align: center, $justify: space-between);
@@ -200,6 +202,7 @@
   &__select {
     padding: 1.55rem 1rem;
     border-radius: 5px;
+    flex-basis: 100%;
     color: #545f7d;
     border: 1px solid rgba(84, 95, 125, 0.15);
   }
@@ -212,5 +215,15 @@
     @include mixin.media("tab") {
       flex-basis: 100% !important;
     }
+  }
+  &__col_12{
+    flex-basis: 100% !important;
+  }
+  &__col_6{
+    flex-basis: 49% !important;
+  }
+
+  &__hide{
+    display: none !important;
   }
 }

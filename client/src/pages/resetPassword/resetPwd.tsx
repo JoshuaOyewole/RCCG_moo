@@ -95,6 +95,7 @@ export default function index() {
                             type='email'
                             name="email"
                             placeholder="Email Address"
+                            inputContainerClassName="mb-2"
                             iconClassName={CommonInputStyles.iconRight}
                             value={credentials.email}
                             onChange={handleChange}

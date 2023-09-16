@@ -13,6 +13,9 @@
   border: 1px solid rgba(84, 95, 125, 0.15);
   @include mixin.flex($align: center);
 
+  &2{
+    flex-basis: 100%;
+  }
   &_col12{
     flex-basis: 100%;
 

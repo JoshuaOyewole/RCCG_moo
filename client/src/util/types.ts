@@ -23,6 +23,7 @@ export type signupCredentialsProps = {
   anniversary: string | number | readonly string[] | undefined,
   dob?: string | number | readonly string[] | undefined,
   department?:string,
+  isMarried?:boolean,
   password: string,
   email: string,
   profilePicture?: string

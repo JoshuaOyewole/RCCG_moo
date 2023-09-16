@@ -77,6 +77,7 @@ const LoginForm = () => {
         name="phone"
         placeholder="Phone Number"
         value={credentials.phone}
+        inputContainerClassName="mb-2"
         onChange={handleChange}
         required
       />
@@ -85,6 +86,7 @@ const LoginForm = () => {
         name="password"
         placeholder="Password"
         icon={Icon}
+        inputContainerClassName="mb-2"
         iconClassName={CommonInputStyles.iconRight}
         value={credentials.password}
         onChange={handleChange}

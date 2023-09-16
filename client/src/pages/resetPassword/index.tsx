@@ -94,6 +94,7 @@ export default function index() {
                             type='text'
                             name="otp"
                             placeholder="Enter OTP Code"
+                            inputContainerClassName="mb-2"
                             iconClassName={CommonInputStyles.iconRight}
                             value={credentials.otp}
                             onChange={handleChange}
@@ -103,6 +104,7 @@ export default function index() {
                             type='password'
                             name="password"
                             placeholder="New Password"
+                            inputContainerClassName="mb-2"
                             iconClassName={CommonInputStyles.iconRight}
                             value={credentials.password}
                             onChange={handleChange}
@@ -112,6 +114,7 @@ export default function index() {
                             type='email'
                             name="email"
                             placeholder="Email address"
+                            inputContainerClassName="mb-2"
                             iconClassName={CommonInputStyles.iconRight}
                             value={credentials.email}
                             onChange={handleChange}

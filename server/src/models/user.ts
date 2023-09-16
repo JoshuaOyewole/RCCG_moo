@@ -13,6 +13,15 @@ const UserModelSchema = new Schema<UserType>({
         type: String,
         required: [true, "Lastname is required"]
     },
+    isMarried: {
+        type: Boolean,
+    },
+    marriageAnniversary: {
+        type: Date,
+    },
+    dob: {
+        type: Date,
+    },
     phone: {
         type: String,
         required: [true, "Phone Number is required"]
@@ -33,8 +42,8 @@ const UserModelSchema = new Schema<UserType>({
         type: String,
         required: [true, "Kindly enter a valid Password"]
     },
-    profilePicture: { 
-        type: String 
+    profilePicture: {
+        type: String
     }
 },
     { timestamps: true }
