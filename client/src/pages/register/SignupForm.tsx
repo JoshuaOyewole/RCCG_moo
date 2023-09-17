@@ -69,10 +69,10 @@ const SignupForm = () => {
                 
                 firstname: credentials.fname,
                 lastname: credentials.lname,
-                dob: credentials.dob,
+                dob: credentials.dob?.slice(-5),
                 phone: credentials.phone,
                 isMarried:credentials.isMarried,
-                marriageAnniversary:credentials.anniversary,
+                marriageAnniversary:credentials.anniversary.slice(-5),
                 gender: credentials.gender.toLowerCase(),
                 department: credentials.department,
                 password: credentials.password,
@@ -80,8 +80,8 @@ const SignupForm = () => {
                 profilePicture: credentials.profilePicture !== "" ? credentials.profilePicture : default_profile_pixs
             };
 
-            //`234${credentials.phone}.slice()`,
             try {
+                
                 const res = await axios.post(`${env.VITE_API_URL}/register`, (registerPayload));
                 setLoading("success")
                 toast.success(res.data.message);

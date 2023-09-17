@@ -17,10 +17,10 @@ const UserModelSchema = new Schema<UserType>({
         type: Boolean,
     },
     marriageAnniversary: {
-        type: Date,
+        type: String,
     },
     dob: {
-        type: Date,
+        type: String,
     },
     phone: {
         type: String,

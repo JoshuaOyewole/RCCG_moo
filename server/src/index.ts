@@ -18,8 +18,7 @@ import userRoute from "./routes/users/index";
 import OTPRoute from "./routes/OTP/index";
 import forgetPWD from "./routes/reset_pwd/forgot_pwd";
 import resetPWD from "./routes/reset_pwd/reset_pwd";
-//import User from "./models/user";
-//const sendEmail = require("./util/sendEmail");
+import { sendAnniversaryMessages, sendBirthdayMessages } from "./util/birthdayMessages";
 
 //DB INITIALIZATION
 dbConnect();
@@ -38,11 +37,16 @@ app.use("/otp", OTPRoute);
 app.use("/forgot_pwd", forgetPWD);
 app.use("/reset_pwd", resetPWD);
 
-
 // Set up your cron job
+cron.schedule("*/30 * * * * *", () => {
+    // */5 * * * *'
+    //sendAnniversaryMessages();
+    sendBirthdayMessages();
 
+});
 
 //ERROR HANDLING MIDDLEWARE
+
 app.use(error);
 
 app.listen(PORT, () => {

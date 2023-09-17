@@ -11,11 +11,18 @@ export interface UserType {
     lastname: string,
     phone: string,
     isMarried?:boolean,
-    marriageAnniversary:Date,
+    marriageAnniversary:String,
     email:string,
-    dob:Date,
+    dob:String,
     department?: string,
     gender:string,
     password:string,
     profilePicture?:string,
 }
+
+export type birthdayMembersProps = {
+    fullnames: String,
+    dob: String,
+    phone: String,
+    email: String
+}[]

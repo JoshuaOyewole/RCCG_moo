@@ -13,15 +13,16 @@ let transporter = nodemailer.createTransport({
 
 //Test Transporter
 transporter.verify((error, success) => {
-    if (error) {
+    if (!success) {
         console.log(error);
     }
 })
 
-const sendEmail = async (mailOptions:mailOptionsType) =>{
-    
+const sendEmail = async (mailOptions: mailOptionsType) => {
+
     try {
         await transporter.sendMail(mailOptions);
+
         return;
     } catch (error) {
         throw error
