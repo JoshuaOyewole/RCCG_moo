@@ -38,7 +38,7 @@ app.use("/forgot_pwd", forgetPWD);
 app.use("/reset_pwd", resetPWD);
 
 // Set up your cron job
-cron.schedule("*/30 * * * * *", () => {
+cron.schedule("0 6 */ * *", () => {
     // */5 * * * *'
     //sendAnniversaryMessages();
     sendBirthdayMessages();
