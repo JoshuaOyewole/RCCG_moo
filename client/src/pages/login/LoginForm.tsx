@@ -32,8 +32,8 @@ const LoginForm = () => {
     setLoading("loading");
 
     try {
-      const res = await axios.post(`${env.VITE_API_URL}/login`, credentials);
-      
+      const res = await axios.post(`https://townhall.empl-dev.site/user/user_registration2`, credentials);
+
       if (res.data) {
         localStorage.setItem("token", res.data.token)
         localStorage.setItem("firstname", res.data.details.firstname)
