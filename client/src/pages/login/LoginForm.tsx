@@ -32,7 +32,7 @@ const LoginForm = () => {
     setLoading("loading");
 
     try {
-      const res = await axios.post(`https://townhall.empl-dev.site/user/user_registration2`, credentials);
+      const res = await axios.post(`https://empl-dev.site/api/user/user_registration2`, credentials);
 
       if (res.data) {
         localStorage.setItem("token", res.data.token)
