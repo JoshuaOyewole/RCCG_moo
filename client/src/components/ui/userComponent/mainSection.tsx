@@ -28,14 +28,15 @@ const MainSection = () => {
         { headers: { Authorization: `Bearer ${token}` }, });
 
       const newData: postType[] = response.data.allPosts; // Assuming the API response contains an array of items
-console.log(newData);
 
       // If newData is empty, there are no more items to load
       if (newData.length === 0) {
         setHasMore(false);
       } else {
-
-        setData((prevData) => [...prevData, ...newData]);
+        let refinedData = newData.filter(post => {
+          { post.photos, post.creator, post.post_description, post.time_posted }
+        })
+        setData((prevData) => [...prevData, ...refinedData]);
         setCurrentPage((prevPage) => prevPage + 1);
       }
     } catch (error) {
@@ -49,7 +50,6 @@ console.log(newData);
     fetchMoreData();
   }, []);
 
-  console.log(data);
 
   return (
     <>
