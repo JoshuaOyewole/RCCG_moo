@@ -16,14 +16,14 @@ const initialValue = {
     lname: "",
     phone: "",
     gender: '',
-    isMarried:false,
+    isMarried: false,
     anniversary: "",
     email: "",
     password: "",
     dob: "",
     department: "",
     profilePicture: "",
-   
+
 }
 
 const SignupForm = () => {
@@ -66,13 +66,12 @@ const SignupForm = () => {
         if (credentials.password.length >= 6) {
             //Destructure credentials into LoginPayload
             const registerPayload = {
-                
                 firstname: credentials.fname,
                 lastname: credentials.lname,
-                dob: credentials.dob?.slice(-5),
+                dob: credentials.dob,
                 phone: credentials.phone,
-                isMarried:credentials.isMarried,
-                marriageAnniversary:credentials.anniversary.slice(-5),
+                isMarried: credentials.isMarried,
+                marriageAnniversary: isMarried ? credentials.anniversary : null,
                 gender: credentials.gender.toLowerCase(),
                 department: credentials.department,
                 password: credentials.password,
@@ -81,10 +80,11 @@ const SignupForm = () => {
             };
 
             try {
-                
+
                 const res = await axios.post(`${env.VITE_API_URL}/register`, (registerPayload));
-                setLoading("success")
                 toast.success(res.data.message);
+                setLoading("success")
+
 
                 setTimeout(() => {
                     navigate("/login");//Assuming all things went well
@@ -108,7 +108,7 @@ const SignupForm = () => {
             toast.error("Password length must be above 6 characters")
         }
     }
-
+    { console.log(isMarried) }
     return (
         <form className={LoginStyle.SignupForm__form} autoComplete="false" onSubmit={handleSubmit}>
             <div className={LoginStyle.SignupForm__wrapper}>
@@ -137,7 +137,7 @@ const SignupForm = () => {
             </div>
             <div className={LoginStyle.SignupForm__wrapper}>
                 <div className={`${CommonInputStyle.input_field_container}`} >
-                    <div>
+                    <div className="w-lg-100">
                         <input
                             type="number"
                             name="phone"
@@ -159,6 +159,8 @@ const SignupForm = () => {
                     </select>
                 </div>
             </div>
+
+
             <div className={LoginStyle.SignupForm__wrapper}>
                 <div className={`${CommonInputStyle.input_field_container} ${isMarried ? LoginStyle.SignupForm__col_6 : LoginStyle.SignupForm__col_12}`}>
                     <select placeholder="Are you a Married?" name="isMarried" required className={` ${LoginStyle.SignupForm__select}`} onChange={handleSelect}>
@@ -178,7 +180,7 @@ const SignupForm = () => {
                         placeholder="Enter your Wedding Anniversary"
                         value={credentials.anniversary}
                         onChange={handleChange}
-                        required
+                        required={isMarried ? true : false}
                     />
                 </div>
             </div>

@@ -9,6 +9,7 @@ import { faPhotoFilm, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { v4 } from "uuid";
+const env = import.meta.env;
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getUserDatas } from "../../../util/auth";
@@ -46,7 +47,7 @@ const Modal = ({ }: IModalProps) => {
         let postURLs: string[] = [];
 
         //Check if the image selected is NOT LESS THAN 2 or GREATER THAN 6
-        if (imageUpload.length >= 2 && imageUpload.length <= 6 && (postDesc !== "")) {
+        if (postDesc !== "") {
             try {
                 //Loop through FileList and upload each image to the Firebase Bucket
                 for (let index = 0; index < imageUpload.length; index++) {
@@ -63,7 +64,7 @@ const Modal = ({ }: IModalProps) => {
                     photos: postURLs
                 };
 
-                const response = await axios.post(`https://dixre-api.onrender.com/post/create`, payload, {
+                const response = await axios.post(`${env.VITE_API_URL}/post/create`, payload, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

@@ -8,7 +8,7 @@ export interface IPostProps {
     postID: string,
     username: string,
     userImg: string,
-    photos: string[],
+    photos?: string[],
     timeposted: string,
     post_desc: string
 }
@@ -36,7 +36,7 @@ export default function Post(props: IPostProps) {
                 <p id={props?.postID}>
                     {props?.post_desc}
                 </p>
-                <p onClick={() => TogglePostView(props.postID)} className={PostStyles.post__seeMoreBtn}>See more</p>
+                {/*    <p onClick={() => TogglePostView(props.postID)} className={PostStyles.post__seeMoreBtn}>See more</p> */}
             </span>
 
             {/* Photos */}

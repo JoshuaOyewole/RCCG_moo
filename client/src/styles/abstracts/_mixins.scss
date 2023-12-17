@@ -29,6 +29,9 @@
     @if($breakpoint == 'tab'){
       @media (max-width:56.25em) {@content};//900px
     }
+    @if($breakpoint == 'lg'){
+      @media (min-width:56.25em) {@content};//900px
+    }
 
     @if($breakpoint == 'phone'){
       @media (max-width:26.625em) {@content};//425px

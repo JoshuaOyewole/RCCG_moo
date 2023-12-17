@@ -10,11 +10,15 @@
 .h-45 {
   height: 45% !important;
 }
-
+.w-lg-100 {
+  @media (min-width: 56.25em) {
+    width: 100% !important;
+  }
+}
 .w-50 {
   width: 50% !important;
 }
-.px-0{
+.px-0 {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -103,4 +107,3 @@
 .center {
   @include mixin.flex($justify: center, $align: center);
 }
-

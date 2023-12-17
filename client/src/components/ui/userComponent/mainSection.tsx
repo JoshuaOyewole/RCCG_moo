@@ -69,7 +69,7 @@ const MainSection = () => {
               userImg={item.creator.profilePicture}
               timeposted={item.time_posted}
               post_desc={item.post_description}
-              photos={item.photos}
+              /* photos={item.photos} */
               key={index}
             />
           ))}

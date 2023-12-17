@@ -11,8 +11,8 @@ export const Header = ({extraClass}: Props) => {
       <Link to='/' className={Style.header_wrapper}>
         <img src={logo} alt="RCCG Logo" className={Style.header_image} />
         <p className={Style.header_para}>
-          <span style={{ display: "block" }}>  MOO (Mount of Olive)</span>
-          <span style={{ display: "block" }}>LP 12, Baruwa Inside, Lagos</span>
+          <span style={{ display: "block" }}>  MOO</span>
+          {/* <span style={{ display: "block" }}>LP 12, Baruwa Inside, Lagos</span> */}
         </p>
       </Link>
 
@@ -26,8 +26,8 @@ export const InAppHeader = ({extraClass}: Props) => {
       <Link to='/' className={Style.header_wrapper}>
         <img src={logo} alt="RCCG Logo" className={Style.header_image} />
         <p className={`${Style.header_para} ${Style.header_para2}`}>
-          <span style={{ display: "block" }}>  MOO (Mount of Olive)</span>
-          <span style={{ display: "block" }}>LP 12, Baruwa Inside, Lagos</span>
+          <span>  MOO</span>
+          {/* <span style={{ display: "block" }}>LP 12, Baruwa Inside, Lagos</span> */}
         </p>
       </Link>
 
