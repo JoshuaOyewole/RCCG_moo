@@ -34,4 +34,10 @@
     width: 5rem;
     height: 5rem;
   }
+  &_logo_name{
+    color: #fff;
+    @include mixin.media("phone") {
+      color: #000;
+    }
+  }
 }

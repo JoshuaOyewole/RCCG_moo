@@ -7,19 +7,15 @@ import { Header } from "../../components/header/Header"
 export default function index() {
   return (
     <>
-      <Header />
+      <Header extraClass="absolute z-10"/>
       <div className={LoginStyles.login__container}>
         {/* LOGIN IMAGE AT THE LEFT */}
         <div className={LoginStyles.login__left}>
 
 
-          <div className={LoginStyles.login__ImageContainer}>
-            <img
-              src={loginImg}
-              alt="Welcome to Mount of Olive. Kindly login below with your login details"
-              className={LoginStyles.login__image}
-            />
-          </div>
+          {/* <div className={LoginStyles.login__ImageContainer}>
+           
+          </div> */}
         </div>
 
         {/* LOGIN FORM SECTION */}

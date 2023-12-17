@@ -4,8 +4,8 @@
 .login {
   &__container {
     background: variable.$White;
-    height: 80vh;
-    @include mixin.flex($align: center, $justify: center);
+    height: 100vh;
+    @include mixin.flex($justify: center);
 
     @include mixin.media("XLdesktop") {
       width: 70% !important;
@@ -68,6 +68,23 @@
     padding: 5rem 10rem;
     width: 50%;
     position: relative;
+    background-image: url("../../assets//images/slideshow2.jpg");
+    background-size: cover;
+    background-position:  center;
+    height: 100%;
+
+    @include mixin.media("tab") {
+      width: 100%;
+      display: none;
+    }
+  }
+  &__signup_left {
+    padding: 5rem 10rem;
+    width: 50%;
+    position: relative;
+    background-image: url("../../assets//images/slideshow1.jpg");
+    background-size: cover;
+    height: 100%;
 
     @include mixin.media("tab") {
       width: 100%;
@@ -216,14 +233,14 @@
       flex-basis: 100% !important;
     }
   }
-  &__col_12{
+  &__col_12 {
     flex-basis: 100% !important;
   }
-  &__col_6{
+  &__col_6 {
     flex-basis: 49% !important;
   }
 
-  &__hide{
+  &__hide {
     display: none !important;
   }
 }

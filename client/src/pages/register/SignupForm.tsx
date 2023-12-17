@@ -126,8 +126,8 @@ const SignupForm = () => {
                 <div className={CommonInputStyle.input_field_container} >
                     <input
                         type="text"
-                        name="lname"
-                        placeholder="Last Name"
+                        name="surname"
+                        placeholder="Surname"
                         value={credentials.lname}
                         onChange={handleChange}
                         required

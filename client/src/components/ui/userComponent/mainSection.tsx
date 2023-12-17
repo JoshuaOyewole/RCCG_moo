@@ -27,13 +27,13 @@ const MainSection = () => {
       const response = await axios.get(`${env.VITE_API_URL}/post?user_id=${user_id}&page=${currentPage}&limit=10`,
         { headers: { Authorization: `Bearer ${token}` }, });
 
-      const newData: postType[] = response.data.posts; // Assuming the API response contains an array of items
+      const newData: postType[] = response.data.allPosts; // Assuming the API response contains an array of items
+console.log(newData);
 
       // If newData is empty, there are no more items to load
       if (newData.length === 0) {
         setHasMore(false);
       } else {
-        console.log(newData);
 
         setData((prevData) => [...prevData, ...newData]);
         setCurrentPage((prevPage) => prevPage + 1);
@@ -49,6 +49,7 @@ const MainSection = () => {
     fetchMoreData();
   }, []);
 
+  console.log(data);
 
   return (
     <>
@@ -69,7 +70,7 @@ const MainSection = () => {
               userImg={item.creator.profilePicture}
               timeposted={item.time_posted}
               post_desc={item.post_description}
-              /* photos={item.photos} */
+              photos={item.photos}
               key={index}
             />
           ))}

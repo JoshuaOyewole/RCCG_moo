@@ -25,6 +25,12 @@
 .tertiary-color {
   color: variable.$tertiary;
 }
+.absolute {
+  position: absolute;
+}
+.z-10 {
+  z-index: 10;
+}
 
 .w-90 {
   width: 90% !important;

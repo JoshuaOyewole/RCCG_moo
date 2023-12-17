@@ -68,21 +68,17 @@ export default function index() {
     return (
 
         <>
-            <Header />
+            <Header extraClass="absolute z-10" />
             <div className={LoginStyles.login__container}>
 
                 {/* LOGIN IMAGE AT THE LEFT */}
                 <div className={LoginStyles.login__left}>
                   
 
-
+{/* 
                     <div className={LoginStyles.login__ImageContainer}>
-                        <img
-                            src={resetPwdImg}
-                            alt="Welcome to Dixre. Kindly login below with your login details"
-                            className={LoginStyles.login__image}
-                        />
-                    </div>
+                    
+                    </div> */}
                 </div>
 
                 {/* LOGIN FORM SECTION */}
