@@ -227,6 +227,16 @@ const SignupForm = () => {
                         <option value="none">Not a Worker</option>
                         <option value="choir">Choir</option>
                         <option value="media">Media</option>
+                        <option value="ushering">Ushering Dept.</option>
+                        <option value="sanitation">Sanitation Dept.</option>
+                        <option value="welfare">Welfare Dept.</option>
+                        <option value="prayer">Prayer Dept.</option>
+                        <option value="engineering">Engineering Dept.</option>
+                        <option value="sunday school">Sunday School Dept.</option>
+                        <option value="security">Security Dept.</option>
+                        <option value="protocol">Protocol Dept.</option>
+                        <option value="prison ministry">Prison Ministry Dept.</option>
+                        <option value="hospitality">Hospitality Dept.</option>
                     </select>
                 </div>
                 {/*   <div className={`${CommonInputStyle.input_field_container}`} >
