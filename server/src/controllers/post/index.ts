@@ -76,12 +76,12 @@ const getAllPost = async (req: Request, res: Response, next: NextFunction) => {
 
             //Check if there is a post in the DB
             if (allPosts.length >= 1) {
-                const posts = allPosts.filter(post => post.creator.id !== user_id);//filter out current user post
+                //const posts = allPosts.filter(post => post.creator.id !== user_id);//filter out current user post
                 // Fetch the total count of Posts (for calculating total pages)
                 const totalPostCount = await Post.countDocuments().exec();
                 // Calculate the total number of pages based on the total count and items per page
                 const totalPages:number = Math.ceil(totalPostCount / limit);
-                res.status(200).json({ posts, totalPages });
+                res.status(200).json({ allPosts, totalPages });
             }
             else {
                 res.status(201).json({
