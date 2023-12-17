@@ -1,3 +1,19 @@
+import mongoose, { Document} from 'mongoose';
+import { UserDocument } from './UserType';
+
+// Interface for Post document
+export interface PostDocument extends Document {
+    user: mongoose.Types.ObjectId | UserDocument;
+    text: string;
+    images: string[];
+    likes: Array<mongoose.Types.ObjectId | UserDocument>;
+    comments: Array<{
+        user: mongoose.Types.ObjectId | UserDocument;
+        text: string;
+        createdAt: Date;
+    }>;
+}
+
 
 export type CreatorType = {
     id: string,

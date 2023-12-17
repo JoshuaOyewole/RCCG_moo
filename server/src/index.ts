@@ -1,6 +1,5 @@
 import express from "express";
 const app = express();
-const cron = require('node-cron');
 import dotenv from "dotenv";
 dotenv.config()
 import cors from "cors"
@@ -16,9 +15,9 @@ import loginRoute from "./routes/auth/login";
 import registerRoute from "./routes/auth/register";
 import userRoute from "./routes/users/index";
 import OTPRoute from "./routes/OTP/index";
+import postRoute from "./routes/post/index";
 import forgetPWD from "./routes/reset_pwd/forgot_pwd";
 import resetPWD from "./routes/reset_pwd/reset_pwd";
-import { sendAnniversaryMessages, sendBirthdayMessages } from "./util/birthdayMessages";
 
 //DB INITIALIZATION
 dbConnect();
@@ -32,18 +31,14 @@ app.use(cookieParser());
 //ROUTES
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+app.use("/post", postRoute);
 app.use("/user", userRoute);
 app.use("/otp", OTPRoute);
 app.use("/forgot_pwd", forgetPWD);
 app.use("/reset_pwd", resetPWD);
 
-// Set up your cron job
-cron.schedule("0 6 */ * *", () => {
-    // */5 * * * *'
-    //sendAnniversaryMessages();
-    sendBirthdayMessages();
-
-});
+//BIRTHDAY SCHEDULER
+require('./controllers/BirthdayMessage/scheduler');
 
 //ERROR HANDLING MIDDLEWARE
 

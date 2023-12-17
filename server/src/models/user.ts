@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import { UserType } from "interfaces/UserType";
+import { UserDocument } from "interfaces/UserType";
 
 // Define a schema
 const Schema = mongoose.Schema;
 
-const UserModelSchema = new Schema<UserType>({
+const UserModelSchema = new Schema<UserDocument>({
     firstname: {
         type: String,
         required: [true, "Firstname is required"]
@@ -20,10 +20,12 @@ const UserModelSchema = new Schema<UserType>({
         type: String,
     },
     dob: {
-        type: String,
+        type: Date,
+        required:true,
     },
     phone: {
         type: String,
+        unique:true,
         required: [true, "Phone Number is required"]
     },
     email: {

@@ -1,23 +1,19 @@
-/* export type  = {
-    id: string,
-    name: string,
-    phone_no: number,
-    profilePicture: string
-}
- */
-export interface UserType {
-    _id?:string,
+import { Document } from "mongoose";
+
+// Interface for User document
+export interface UserDocument extends Document {
+    username?: string;
+    email: string;
+    password: string;
+    profilePicture?: string;
     firstname: string,
     lastname: string,
     phone: string,
     isMarried?:boolean,
-    marriageAnniversary:String,
-    email:string,
+    marriageAnniversary?:String,
     dob:String,
     department?: string,
-    gender:string,
-    password:string,
-    profilePicture?:string,
+    gender?:string,
 }
 
 export type birthdayMembersProps = {

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { PostType} from "interfaces/PostType";
+import { PostType } from "interfaces/PostType";
 
 // Define a schema
 const Schema = mongoose.Schema;
@@ -15,7 +15,7 @@ const PostModelSchema = new Schema<PostType>(
             required: true,
         },
         photos: [{
-            type:String,
+            type: String,
             required: [true, "Photos are required"]
         }],
         creator: {
@@ -28,3 +28,30 @@ const PostModelSchema = new Schema<PostType>(
 );
 
 export default mongoose.model('Post', PostModelSchema);
+
+
+
+
+/* import mongoose from "mongoose";
+import { PostDocument } from "interfaces/PostType";
+
+
+// Define a schema
+const Schema = mongoose.Schema;
+
+const PostSchema = new Schema<PostDocument>({
+    user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    text: { type: String, required: true },
+    images: [{ type: String }],
+    likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    comments: [{
+        user: { type: Schema.Types.ObjectId, ref: 'User' },
+        text: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now }
+        // Other comment properties...
+    }],
+},
+    { timestamps: true }
+);
+
+export default mongoose.model('Post', PostSchema); */
