@@ -57,6 +57,7 @@ const sendOTP = async (otpDetails: mailOptionsType) => {
                     font-family: "Poppins", sans-serif;
                     font-weight: 400;
                     font-style: normal;
+                    font-size:20px;
                   }
                   .container {
                     width: 50vw;
@@ -72,7 +73,7 @@ const sendOTP = async (otpDetails: mailOptionsType) => {
                   }
                   .bg_color {
                     background-color: #3e2b55;
-                    height: 10px;
+                    height: 5px;
                     border-top-right-radius: 0.5rem;
                     border-top-left-radius: 0.5rem;
                     margin-top: 1rem;
