@@ -143,7 +143,8 @@ const sendOTP = async (otpDetails: mailOptionsType) => {
                     <p class="small_height">
                       Joshua Oyewole <br />
                       Lead Tutor <br />
-                      Orisfina Bootcamp 07032054367 <br />
+                      Orisfina Bootcamp <br />
+                      Hotline: 07032054367 <br />
                       Website: <a href="https://oci.com.ng">oci.com.ng</a>
                     </p>
                   </div>
