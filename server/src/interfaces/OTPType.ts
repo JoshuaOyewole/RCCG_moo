@@ -18,7 +18,8 @@ export type mailOptionsType = {
     html?: string,
     email?: string,
     message?: string,
-    duration?: number
+    duration?: number,
+    name?:string
 }
 
 export type verifyOTPCredentialsType = {

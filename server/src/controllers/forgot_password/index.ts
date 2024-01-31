@@ -7,23 +7,25 @@ import { hashData } from "../../util/hashData";
 
 const forgetPWD = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        let { email } = req.body;
+        let { email,name } = req.body;
 
         //trim off whiteSpace
         email = email.trim();
 
-        if (!email) next(createError(400,"Email Address is required"))
+        if (!email) next(createError(400, "Email Address is required"))
 
         const existingUser = await User.findOne({ email });
 
 
-        if (!existingUser) next(createError(400,'Email Address provided does not Exist!'));
+        if (!existingUser) next(createError(400, 'Email Address provided does not Exist!'));
 
         const otpDetails = {
             email,
-            subject: 'Password Reset',
+            /* subject: 'Password Reset', */
+            subject: 'Orisfina Bootcamp',
             message: "Enter the Code below to reset your Password",
-            duration: 1
+            duration: 1,
+            name
         }
 
         await sendOTP(otpDetails);

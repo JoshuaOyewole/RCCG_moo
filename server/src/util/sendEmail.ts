@@ -3,20 +3,20 @@ import nodemailer from "nodemailer";
 
 const { AUTH_EMAIL, AUTH_PASS } = process.env;
 
-let transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com",
-    auth: {
-        user: AUTH_EMAIL,
-        pass: AUTH_PASS
-    }
-})
+    let transporter = nodemailer.createTransport({
+        host: "smtp-mail.outlook.com",
+        auth: {
+            user: AUTH_EMAIL,
+            pass: AUTH_PASS
+        }
+    })
 
-//Test Transporter
-transporter.verify((error, success) => {
-    if (!success) {
-        console.log(error);
-    }
-})
+    //Test Transporter
+    transporter.verify((error, success) => {
+        if (!success) {
+            console.log(error);
+        }
+    })
 
 const sendEmail = async (mailOptions: mailOptionsType) => {
 
