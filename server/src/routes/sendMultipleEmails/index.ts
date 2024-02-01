@@ -1,6 +1,6 @@
 import express from 'express';
 import {sendMultipleEmails} from "../../util/data";
-import { sendMeetingSchedule } from 'controllers/forgot_password';
+import { sendMeetingSchedule } from '../../controllers/forgot_password/index';
 
 const router = express.Router();
 
