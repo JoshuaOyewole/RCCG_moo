@@ -60,6 +60,7 @@ const MainSection = () => {
     fetchMoreData();
   }, []);
 
+  console.log(data);
 
   return (
     <>
