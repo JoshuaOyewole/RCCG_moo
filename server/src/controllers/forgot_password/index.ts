@@ -53,7 +53,6 @@ const forgetPWD = async (req: Request, res: Response, next: NextFunction) => {
                   }
                   .content {
                     padding: 2rem 1rem;
-                    width:60vw;
                     background-color: #f4f4f4;
                   }
                   .bg_color {
@@ -65,10 +64,10 @@ const forgetPWD = async (req: Request, res: Response, next: NextFunction) => {
                   }
                   p,h3 {
                     line-height: 2rem;
-                    font-size:20px;
+                    font-size:16px;
                   }
                   li{
-                    font-size:20px;
+                    font-size:16px;
                   }
                   .small_height{
                     line-height: 1.9rem;
