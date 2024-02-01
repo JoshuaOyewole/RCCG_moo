@@ -18,6 +18,7 @@ import OTPRoute from "./routes/OTP/index";
 import postRoute from "./routes/post/index";
 import forgetPWD from "./routes/reset_pwd/forgot_pwd";
 import resetPWD from "./routes/reset_pwd/reset_pwd";
+import { sendMultipleEmails } from "./util/data";
 
 //DB INITIALIZATION
 dbConnect();
@@ -35,6 +36,7 @@ app.use("/post", postRoute);
 app.use("/user", userRoute);
 app.use("/otp", OTPRoute);
 app.use("/forgot_pwd", forgetPWD);
+app.use("/oci_emails", sendMultipleEmails);
 app.use("/reset_pwd", resetPWD);
 
 //BIRTHDAY SCHEDULER

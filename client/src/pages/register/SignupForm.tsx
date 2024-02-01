@@ -108,7 +108,7 @@ const SignupForm = () => {
             toast.error("Password length must be above 6 characters")
         }
     }
-    { console.log(isMarried) }
+    
     return (
         <form className={LoginStyle.SignupForm__form} autoComplete="false" onSubmit={handleSubmit}>
             <div className={LoginStyle.SignupForm__wrapper}>
@@ -126,7 +126,7 @@ const SignupForm = () => {
                 <div className={CommonInputStyle.input_field_container} >
                     <input
                         type="text"
-                        name="surname"
+                        name="lname"
                         placeholder="Surname"
                         value={credentials.lname}
                         onChange={handleChange}

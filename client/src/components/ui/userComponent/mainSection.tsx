@@ -27,18 +27,28 @@ const MainSection = () => {
       const response = await axios.get(`${env.VITE_API_URL}/post?user_id=${user_id}&page=${currentPage}&limit=10`,
         { headers: { Authorization: `Bearer ${token}` }, });
 
-      const newData: postType[] = response.data.allPosts; // Assuming the API response contains an array of items
+      let newData: postType[] = await response.data.allPosts; // Assuming the API response contains an array of items
 
       // If newData is empty, there are no more items to load
-      if (newData.length === 0) {
+
+      if (newData.length === 0 || undefined) {
         setHasMore(false);
       } else {
-        let refinedData = newData.filter(post => {
-          { post.photos, post.creator, post.post_description, post.time_posted }
-        })
-        setData((prevData) => [...prevData, ...refinedData]);
+
+        /*         let refinedData = newData.filter(post => { post.photos, post.creator, post.post_description, post.time_posted } */
+
+        const filteredData = newData.map((post) => ({
+          id: post.id,
+          photos: post.photos,
+          creator: post.creator,
+          post_description: post.post_description,
+          time_posted: post.time_posted
+        }));
+
+        setData(filteredData);
         setCurrentPage((prevPage) => prevPage + 1);
       }
+
     } catch (error) {
       console.error('Error fetching data:', error);
       setHasMore(false); // Disable infinite scroll on error
@@ -49,7 +59,6 @@ const MainSection = () => {
     // Fetch initial data when the component mounts
     fetchMoreData();
   }, []);
-
 
   return (
     <>
@@ -65,9 +74,9 @@ const MainSection = () => {
 
           {data.map((item, index) => (
             <Post
-              postID={item._id}
-              username={item.creator.name}
-              userImg={item.creator.profilePicture}
+              postID={item.id}
+              username={item.creator?.name}
+              userImg={item.creator?.profilePicture}
               timeposted={item.time_posted}
               post_desc={item.post_description}
               photos={item.photos}

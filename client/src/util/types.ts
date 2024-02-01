@@ -3,13 +3,13 @@ export type MainSectionType = {
 }
 
 export type postType = {
-  _id: string;
-  creator: {
+  id?: string;
+  creator?: {
     id: string,
     name: string,
     profilePicture: string
   },
-  createdAt: string,
+  createdAt?: string,
   photos: string[],
   post_description: string,
   time_posted: string,

@@ -5,11 +5,11 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 
 export interface IPostProps {
-    postID: string,
-    username: string,
-    userImg: string,
+    postID?: string,
+    username?: string,
+    userImg?: string,
     photos?: string[],
-    timeposted: string,
+    timeposted?: string,
     post_desc: string
 }
 export default function Post(props: IPostProps) {
@@ -17,10 +17,10 @@ export default function Post(props: IPostProps) {
 
     const [toggleView, setToggleView] = useState<boolean>(true);
 
-    const TogglePostView = (postID: string) => {
-        alert(`Viewing Full Description now, ${postID}`)
-
+    const TogglePostView = () => {
+        console.log('Expanded');
     }
+
     return (
         <div className={PostStyles.post__post}>
             {/* Header */}
@@ -34,9 +34,11 @@ export default function Post(props: IPostProps) {
             {/* Description */}
             <span>
                 <p id={props?.postID}>
-                    {props?.post_desc}
+                    {props.post_desc.length > 400 ? `${props?.post_desc?.slice(0, 400)}....`  : props.post_desc}
+                    
                 </p>
-                {/*    <p onClick={() => TogglePostView(props.postID)} className={PostStyles.post__seeMoreBtn}>See more</p> */}
+                {props?.post_desc?.length > 400 && <p onClick={() => TogglePostView()} className={PostStyles.post__seeMoreBtn}>See more</p>}
+
             </span>
 
             {/* Photos */}
