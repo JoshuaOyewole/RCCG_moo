@@ -14,11 +14,11 @@ const forgetPWD = async (req: Request, res: Response, next: NextFunction) => {
 
     if (!email) next(createError(400, "Email Address is required"))
 
-    const existingUser = await User.findOne({ email });
+   /*  const existingUser = await User.findOne({ email });
 
 
     if (!existingUser) next(createError(400, 'Email Address provided does not Exist!'));
-
+ */
     const otpDetails = {
       email,
       /* subject: 'Password Reset', */
