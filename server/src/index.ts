@@ -19,6 +19,7 @@ import postRoute from "./routes/post/index";
 import forgetPWD from "./routes/reset_pwd/forgot_pwd";
 import resetPWD from "./routes/reset_pwd/reset_pwd";
 import sendMeetingSchedule from "./routes/sendMultipleEmails/index";
+import flight from "./routes/flight/index";
 
 //DB INITIALIZATION
 dbConnect();
@@ -34,16 +35,16 @@ app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/post", postRoute);
 app.use("/user", userRoute);
-app.use("/otp", OTPRoute);
+//app.use("/otp", OTPRoute);
 app.use("/forgot_pwd", forgetPWD);
-app.use("/meeting_link", sendMeetingSchedule);
+//app.use("/meeting_link", sendMeetingSchedule);
 app.use("/reset_pwd", resetPWD);
+app.use("/flight", flight);
 
 //BIRTHDAY SCHEDULER
 require('./controllers/BirthdayMessage/scheduler');
 
 //ERROR HANDLING MIDDLEWARE
-
 app.use(error);
 
 app.listen(PORT, () => {

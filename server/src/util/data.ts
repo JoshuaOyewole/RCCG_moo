@@ -2,7 +2,7 @@
 export const dataEmails = [
   { email: "joshuaoyewole20@gmail.com", name: "Joshua Oyewole" },
   { email: "joshpp2013@gmail.com", name: "Joshua Oyewole" },
-  /* { email: "ajayiaustine5@gmail.com", name: "Ajayi Austine" }, */
+  { email: "ajayiaustine5@gmail.com", name: "Ajayi Austine" },
   { email: "godwinpraise05@gmail.com", name: "Praise Godwin" },
   { email: "checkoutmd@gmail.com", name: "Donald Ogioben" },
   { email: "Vonnecrux@gmail.com", name: "Daniel Irene" },
@@ -17,7 +17,7 @@ export const dataEmails = [
   { email: "sofiyulahiakanbi@gmail.com", name: "Sofiyulahi Akanbi" },
   { email: "charlieaigbovbiosa03@gmail.com", name: "Charlie Aigbovbiosa" },
   { email: "quadrioriyomi5050@gmail.com", name: "Babawale Quadri" },
-  { email: "ademolaayomide019@gmail.com", name: "Ademola Idris" },
+  /*  { email: "ademolaayomide019@gmail.com", name: "Ademola Idris" }, */
   { email: "dennisayuba114@gmail.com", name: "Dennis Ayuba" },
   { email: "Abdulrahmanmuhammad00123@gmail.com", name: "Abdulrahman Muhammad" },
   { email: "oziomaonyero98@gmail.com", name: "Ozioma Onyero" },
@@ -36,7 +36,7 @@ export const dataEmails = [
   { email: "peterchukwuemekaeneteh1977@gmail.com", name: "Peter Eneteh" },
   { email: "dosucasmil93@gmail.com", name: "Dosu Casmil Minflinmawu" },
   { email: "adeoludavid1@gmail.com", name: "Adejimi Adeolu David" },
-  
+
 ];
 import { Request, Response, NextFunction } from 'express';
 import nodemailer from 'nodemailer';
@@ -60,7 +60,7 @@ transporter.verify((error, success) => {
   }
 })
 
-const sendMultipleEmails = (req: Request, res: Response, next: NextFunction ) => {
+const sendMultipleEmails = (req: Request, res: Response, next: NextFunction) => {
 
 
   // Create a limiter to avoid overloading the server
@@ -196,8 +196,10 @@ const sendMultipleEmails = (req: Request, res: Response, next: NextFunction ) =>
     success: true,
     status: 200,
     message: `Emails has been successfully!`,
-});
+  });
 }
 
 
 export { sendMultipleEmails }
+
+

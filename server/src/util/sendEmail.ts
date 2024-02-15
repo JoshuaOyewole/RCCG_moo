@@ -12,11 +12,11 @@ const { AUTH_EMAIL, AUTH_PASS } = process.env;
     })
 
     //Test Transporter
-    transporter.verify((error, success) => {
+   /*  transporter.verify((error, success) => {
         if (!success) {
             console.log(error);
         }
-    })
+    }) */
 
 const sendEmail = async (mailOptions: mailOptionsType) => {
 
